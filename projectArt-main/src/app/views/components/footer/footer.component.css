@@ -1,0 +1,30 @@
+/* filepath: /c:/Users/josti/OneDrive/Escritorio/arteProject/src/app/views/components/footer/footer.component.css */
+.footer {
+  width: 100%;
+  background: linear-gradient(to right, #ECC30B, #EF8A17); /* Gradient background */
+  padding: 2em 0;
+  position: relative;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align text */
+}
+
+.footer-column h3,
+.footer-column p {
+  margin: 0.2em 0;
+  font-size: 0.8em; /* Same font size for all text */
+  color: #fff; /* White color for text */
+  width: 100%; /* Same width for all text */
+  text-align: center; /* Center align text */
+}

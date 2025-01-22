@@ -1,0 +1,193 @@
+.store-container {
+    width:80%;
+    margin: auto;
+    text-align: center;
+}
+
+.cards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+}
+
+.piece-card {
+    width: 250px; /* Tamaño pequeño */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.piece-card img {
+    width: 100%;
+    height: 300px
+}
+
+.card-details {
+    padding: 5px;
+}
+
+.card-details h2 {
+    font-size: 14px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.piece-type {
+    padding: 2px 6px;
+    font-size: 10px;
+    color: #fff;
+    background-color: #ccc;
+    border-radius: 12px;
+}
+
+.pieces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.piece {
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.piece img {
+  width: 100%;
+  height: auto;
+}
+
+.piece:hover {
+  transform: scale(1.05);
+}
+
+.review-form {
+  margin-top: 20px;
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-form h3 {
+  margin-top: 0;
+}
+
+.review-form label {
+  display: block;
+  margin-top: 10px;
+}
+
+.review-form input,
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.review-form button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.review-form button:hover {
+  background-color:  #EF8A17;
+}
+.piece-card.active {
+    border: 2px solid  #EF8A17;
+    box-shadow: 0 0 10px #ECC30B;
+}
+
+.view-more-btn {
+    background: linear-gradient(to right, #ECC30B, #EF8A17);
+    color: white;
+    border: none;
+    padding: 20px 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out, background 1s ease-in-out;
+    border-radius: 15px;
+    margin: 10px 0; /* Ajustar margen */
+    align-self: flex-start; /* Alinear a la izquierda */
+    margin-right: 2%;
+  }
+  
+  .view-more-btn:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to left, #ECC30B, #EF8A17);
+  }
+
+/* Estilos para la calificación con estrellas */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 2em;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star-rating input[type="radio"]:checked ~ label {
+  color: #EF8A17;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #EF8A17;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.pagination button.active {
+  background-color: #0056b3;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}

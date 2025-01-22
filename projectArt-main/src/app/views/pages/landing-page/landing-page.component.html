@@ -1,0 +1,17 @@
+<div class="intro-section">
+    <div class="intro-text">
+      <h1 class="intro-title">Bienvenidos a nuestro Rincón de Artistas</h1>
+      <p class="intro-description">
+    Explora un espacio vibrante y lleno de inspiración donde el talento se encuentra con la creatividad. 
+    Ya seas pintor, escultor o escritor, aquí encontrarás un refugio para expresar tu arte y conectarte 
+    con una comunidad apasionada. Comparte tus obras, descubre nuevas técnicas y déjate llevar por la 
+    magia del arte en todas sus formas.
+      </p>
+      <button *ngIf="currentUser==null" class="view-more-btn" [routerLink]="['/register']" [queryParams]="{ role: 'artist' }">Registrarme como artista</button>
+      <button *ngIf="currentUser==null" class="view-more-btn" [routerLink]="['/register']" [queryParams]="{ role: 'client' }">Registrarme como comprador</button>
+    </div>
+    <div class="intro-image">
+      <img src="assets/landing.png" alt="Intro Image">
+    </div>
+  </div>
+  

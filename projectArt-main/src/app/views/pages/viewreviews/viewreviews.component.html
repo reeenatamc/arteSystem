@@ -1,0 +1,52 @@
+<div class="reviews-container">
+  <h2>Reseñas</h2>
+
+  <!-- Controles de paginación -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <ul class="reviews-grid">
+    <li *ngFor="let review of paginatedReviews" class="review-item">
+      <div class="review-card">
+        <img [src]="review.piece.image" alt="{{ review.piece.name }}" class="piece-image">
+        <div class="review-info">
+          <h3>{{ review.piece.name }}</h3>
+          <p><strong>Usuario:</strong> {{ review.user.name }}</p>
+          <p class="stars">
+            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons" [ngClass]="{'filled': star <= review.score}">
+              star
+            </span>
+          </p>
+          <div *ngIf="selectedReview && selectedReview.id === review.id">
+            <label for="description"><strong>Descripción:</strong></label>
+            <textarea id="description" [(ngModel)]="selectedReview.description" name="description" required></textarea>
+          </div>
+          <div *ngIf="!(selectedReview && selectedReview.id === review.id)">
+            <p><strong>Descripción:</strong> {{ review.description | slice:0:100 }}<span *ngIf="review.description.length > 100">...</span></p>
+            <button *ngIf="review.description.length > 100" (click)="toggleFullDescription(review)">Ver más</button>
+            <div *ngIf="selectedReview && selectedReview.id === review.id" class="full-description">
+              <p>{{ review.description }}</p>
+              <button (click)="toggleFullDescription(null)">Ver menos</button>
+            </div>
+          </div>
+          <div class="review-actions" *ngIf="currentUser && (review.user.id === currentUser.id || currentUser.role === 'admin')">
+            <button *ngIf="!(selectedReview && selectedReview.id === review.id) && review.user.id === currentUser.id" (click)="editReview(review)">Editar</button>
+            <button *ngIf="selectedReview && selectedReview.id === review.id" (click)="saveReview()">Guardar</button>
+            <button *ngIf="selectedReview && selectedReview.id === review.id" (click)="cancelEdit()">Cancelar</button>
+            <button *ngIf="review.user.id === currentUser.id || currentUser.role === 'admin'" (click)="deleteReview(review.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Controles de paginación (repetidos abajo) -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

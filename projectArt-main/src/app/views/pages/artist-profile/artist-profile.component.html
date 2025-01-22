@@ -1,0 +1,47 @@
+<div *ngIf="artist" class="artist-profile-container">
+  <div class="artist-name">
+    <p>{{ artist.name }}</p>
+  </div>
+  <div class="artist-image">
+    <img [src]="artist.image" alt="{{ artist.name }}">
+  </div>
+  <div class="artist-description">
+    <p *ngIf="!isEditing">{{ artist.description }}</p>
+    <textarea *ngIf="isEditing" [(ngModel)]="artist.description"></textarea>
+  </div>
+  <div *ngIf="currentUser && currentUser.role === 'artist'" class="edit-buttons">
+    <button *ngIf="!isEditing" (click)="toggleEdit()">Editar Perfil</button>
+    <button *ngIf="isEditing" (click)="saveChanges()">Guardar Cambios</button>
+    <button *ngIf="isEditing" (click)="toggleEdit()">Cancelar</button>
+  </div>
+</div>
+<div *ngIf="!artist">
+  <p>Loading...</p>
+</div>
+
+<div class="background-container">
+  <div class="services-container">
+    <div class="servicios">
+      <h2>Servicios</h2>
+      <p>Más servicios que ofrece el artista incluyen opciones personalizadas, colaboraciones, talleres y asesorías creativas.</p>
+      <ul class="servicios-list">
+        <li>Retratos</li>
+        <li>Abstracto</li>
+        <li>Casa</li>
+      </ul>
+    </div>
+  </div>
+  <div class="artworks-container">
+    <div class="search-container">
+      <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchQuery" (input)="onSearch()">
+    </div>
+    <div class="artworks">
+      <div *ngFor="let artwork of pieces" class="artwork-card" (click)="onCardClick(artwork.id)">
+        <img [src]="artwork.image" alt="{{ artwork.name }}">
+        <p *ngIf="currentUser && artist && currentUser.id === artist.id" [ngClass]="{'verification-true': artwork.verification, 'verification-false': !artwork.verification}">
+          {{ artwork.verification ? 'Verificado' : 'Pendiente' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

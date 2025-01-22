@@ -1,0 +1,59 @@
+<div class="store-container">
+
+<div *ngIf="sale">
+  <h2>Reseñas para el Pedido ID: {{ sale.id }}</h2>
+  <p>Total: {{ sale.total | currency }}</p>
+  <p [ngClass]="sale.status ? 'verification-true' : 'verification-false'">
+    {{ sale.status ? 'Completado' : 'Pendiente' }}
+  </p>
+
+  <!-- Controles de paginación -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <div class="cards-container">
+    <div *ngFor="let piece of paginatedPieces" 
+         (click)="selectPiece(piece)"  
+         class="piece-card" 
+         [ngClass]="{'active': selectedPiece === piece}">
+        <img [src]="piece.image" alt="{{ piece.name }}">
+        <div class="piece-info">
+            <h4>{{ piece.name }}</h4>
+        </div>
+    </div>
+  </div>
+
+  <!-- Controles de paginación (repetidos abajo) -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <div *ngIf="selectedPiece" class="review-form">
+    <h3>Reseña para {{ selectedPiece.name }}</h3>
+    <form (ngSubmit)="submitReview()">
+      <label for="score">Puntuación:</label>
+      <div class="star-rating">
+        <input type="radio" id="star5" name="score" [(ngModel)]="review.score" [value]="5" />
+        <label for="star5" title="5 estrellas"><span class="material-symbols-outlined">star</span></label>
+        <input type="radio" id="star4" name="score" [(ngModel)]="review.score" [value]="4" />
+        <label for="star4" title="4 estrellas"><span class="material-symbols-outlined">star</span></label>
+        <input type="radio" id="star3" name="score" [(ngModel)]="review.score" [value]="3" />
+        <label for="star3" title="3 estrellas"><span class="material-symbols-outlined">star</span></label>
+        <input type="radio" id="star2" name="score" [(ngModel)]="review.score" [value]="2" />
+        <label for="star2" title="2 estrellas"><span class="material-symbols-outlined">star</span></label>
+        <input type="radio" id="star1" name="score" [(ngModel)]="review.score" [value]="1" />
+        <label for="star1" title="1 estrella"><span class="material-symbols-outlined">star</span></label>
+      </div>
+      
+      <label for="description">Descripción:</label>
+      <textarea id="description" [(ngModel)]="review.description" name="description" required></textarea>
+      
+      <button class="view-more-btn" type="submit">Enviar Reseña</button>
+    </form>
+  </div>
+</div>

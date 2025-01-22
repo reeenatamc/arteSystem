@@ -1,0 +1,9 @@
+<div class="category-container">
+  <h1>Categorías principales</h1>
+  <div class="cards-container">
+    <div *ngFor="let card of cards" class="card" (click)="navigateToType(card.type)">
+      <img [src]="card.image" alt="{{ card.name }}">
+      <div class="card-name">{{ card.name }}</div>
+    </div>
+  </div>
+</div>

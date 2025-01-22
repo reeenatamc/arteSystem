@@ -1,0 +1,25 @@
+<div *ngIf="piece$ | async as pieces">
+  <div *ngFor="let piece of pieces" class="piece-info-container">
+    <div class="author">
+      <h2>{{ piece.author }}</h2>
+    </div>
+    <div class="piece-details">
+      <div class="piece-image">
+        <img [src]="piece.image" alt="{{ piece.name }}">
+      </div>
+      <div class="piece-info">
+        <h1>{{ piece.name }}</h1>
+        <p>{{ piece.description }}</p>
+        <p><strong>Dimensiones:</strong> {{ piece.width }} x {{ piece.height }}</p>
+            <p class="price">{{ piece.price | currency }}</p>
+            <span class="piece-type">{{ piece.subcategory }}</span>
+      </div>
+    </div>
+    <div class="reviews">
+      <h3>Reseñas</h3>
+      <div >
+        <p>asd</p>
+      </div>
+    </div>
+  </div>
+</div>

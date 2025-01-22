@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="login-box">
+    <div class="login-image">
+      <img src="assets/login.png" alt="Login Image">
+    </div>
+    <div class="login-form">
+      <h2>USER LOGIN</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <i class="fa fa-user"></i>
+          <div class="separator"></div>
+          <input id="email" formControlName="email" type="email" placeholder="Username">
+        </div>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+        <div class="input-group">
+          <i class="fa fa-lock"></i>
+          <div class="separator"></div>
+          <input id="password" formControlName="password" type="password" placeholder="Password">
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      </form>
+      <div class="social-login">
+        <p>Or login with</p>
+        <div class="social-icons">
+          <button class="social-btn google"><i class="fa fa-google"></i></button>
+          <button class="social-btn facebook"><i class="fa fa-facebook"></i></button>
+          <button class="social-btn apple"><i class="fa fa-apple"></i></button>
+          <button class="social-btn other"><i class="fa fa-ellipsis-h"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

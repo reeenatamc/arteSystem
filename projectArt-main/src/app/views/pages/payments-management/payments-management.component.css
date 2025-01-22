@@ -1,0 +1,151 @@
+.sale-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin: 20px auto; /* Centra la tarjeta horizontalmente */
+  max-width: 800px; /* Ancho máximo de la tarjeta */
+  width: 90%; /* Asegura que la tarjeta ocupe el 100% del contenedor */
+}
+
+.sale-info {
+  flex: 1;
+}
+
+.sale-info h3,
+.sale-info p {
+  margin: 5px 0;
+}
+
+.pieces {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.piece img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.payment-proof {
+  margin-left: 20px;
+}
+
+.payment-proof a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.payment-proof a:hover {
+  text-decoration: underline;
+}
+
+.verification-true {
+  background-color: green;
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+.verification-false {
+  background-color: rgb(253, 253, 118);
+  color: black;
+  border-radius: 15px;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-verify {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-verify:hover {
+  background-color: #218838;
+}
+
+.btn-reject {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-reject:hover {
+  background-color: #c82333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.pagination button.active {
+  background-color: #0056b3;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+/* Media query para dispositivos móviles */
+@media (max-width: 600px) {
+  .sale-card {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+  }
+
+  .payment-proof {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .pieces {
+    justify-content: start;
+  }
+}

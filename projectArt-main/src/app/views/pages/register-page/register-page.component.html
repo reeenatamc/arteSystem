@@ -1,0 +1,57 @@
+<div class="register-container">
+    <div class="register-box">
+        <div class="register-form">
+            <h2>Create a Free Account</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="username">Name:</label>
+                        <input id="username" formControlName="username" type="text">
+                        <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+                            <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</small>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input id="email" formControlName="email" type="email">
+                        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                            <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+                            <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input id="password" formControlName="password" type="password">
+                        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                            <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+                            <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</small>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="image">Profile Image:</label>
+                        <input id="image" type="file" (change)="onFileChange($event)">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="phone">Numero telefonico:</label>
+                        <input id="phone" formControlName="phone" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="skills">Skills:</label>
+                        <input id="skills" formControlName="skills" type="text">
+                    </div>
+                </div>
+                <button type="submit" [disabled]="registerForm.invalid">Create Account</button>
+            </form>
+        </div>
+    </div>
+</div>

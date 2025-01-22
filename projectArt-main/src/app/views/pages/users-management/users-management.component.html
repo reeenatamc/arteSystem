@@ -1,0 +1,52 @@
+<div class="users-container">
+  <h2>Gestión de Usuarios</h2>
+  <div class="user-list">
+    <ul>
+      <li *ngFor="let user of paginatedUsers" class="user-item">
+        <div class="user-card">
+          <img [src]="user.image" alt="{{ user.name }}" class="user-image">
+          <div class="user-info">
+            <h3>{{ user.name }}</h3>
+            <p *ngFor="let skill of user.skills">{{ skill.name }}</p>
+          </div>
+          <div class="user-actions">
+            <button class="editbutton" (click)="editUser(user)">Editar</button>
+            <button class="deletebutton" (click)="deleteUser(user.id)">
+                <span class="material-icons">delete</span>
+              </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div *ngIf="selectedUser" class="edit-form">
+      <h3>Editar Usuario</h3>
+      <form (ngSubmit)="saveUser()">
+        <label for="name">Nombre:</label>
+        <input id="name" [(ngModel)]="selectedUser.name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input id="email" [(ngModel)]="selectedUser.email" name="email" required>
+        
+        <label for="role">Rol:</label>
+        <input id="role" [(ngModel)]="selectedUser.role" name="role" required>
+        
+        <label for="description">Descripción:</label>
+        <textarea id="description" [(ngModel)]="selectedUser.description" name="description" required></textarea>
+        
+        <label for="phone">Teléfono:</label>
+        <input id="phone" [(ngModel)]="selectedUser.phone" name="phone" required>
+            <div>
+                <button class="btn-save" type="submit">Guardar</button>
+                <button class="btn-cancel"  type="button" (click)="cancelEdit()">Cancelar</button>
+            </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Controles de paginación -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

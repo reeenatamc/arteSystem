@@ -1,0 +1,27 @@
+<div class="store-container">
+  <!-- Controles de paginación -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <div class="cards-container">
+    <div *ngFor="let artist of paginatedArtists" class="piece-card" (click)="onCardClick(artist.id)">
+      <img [src]="artist.image" alt="{{ artist.name }}">
+      <div class="card-details">
+        <h2>{{ artist.name }} <span class="piece-type">{{ artist.skills[0].name }}</span></h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controles de paginación (repetidos abajo) -->
+  <div class="pagination">
+    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

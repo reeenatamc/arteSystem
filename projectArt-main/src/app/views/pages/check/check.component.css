@@ -1,0 +1,24 @@
+.check-container {
+  background-color: #ECC30B;
+  height: 79.4vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.check-container img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.check-container h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.check-container p {
+  font-size: 18px;
+}
