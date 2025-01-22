@@ -6,9 +6,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  margin: 20px auto; /* Centra la tarjeta horizontalmente */
-  max-width: 800px; /* Ancho máximo de la tarjeta */
-  width: 90%; /* Asegura que la tarjeta ocupe el 100% del contenedor */
+  margin: 20px auto;
+  /* Centra la tarjeta horizontalmente */
+  max-width: 800px;
+  /* Ancho máximo de la tarjeta */
+  width: 90%;
+  /* Asegura que la tarjeta ocupe el 100% del contenedor */
 }
 
 .sale-info {
@@ -47,57 +50,59 @@
 }
 
 .verification-true {
-    background-color: green;
-    color: white;
-    border-radius: 15px;
-    padding: 10px;
-    width: 50%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-      margin-bottom: 2%;
-  }
-  
-  .verification-false {
-    background-color: rgb(253, 253, 118);
-    color: black;
-    border-radius: 15px;
-    padding: 10px;
-    width: 50%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-      margin-bottom: 2%;
-  }
+  background-color: green;
+  color: white;
+  border-radius: 15px;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 2%;
+}
 
-    .pagination {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .pagination button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 4px;
-  }
-  
-  .pagination button.active {
-    background-color: #0056b3;
-  }
-  
-  .pagination button:hover {
-    background-color: #0056b3;
-  }
+.verification-false {
+  background-color: rgb(253, 253, 118);
+  color: black;
+  border-radius: 15px;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  all: unset;
+  background-color: #f44336;
+  color: white;
+  padding: 10px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination button.active {
+  opacity: 0.8;
+}
+
+.pagination button:hover {
+  opacity: 0.8;
+}
+
 /* Media query para dispositivos móviles */
 @media (max-width: 600px) {
   .sale-card {
