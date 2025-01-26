@@ -1,5 +1,5 @@
 .store-container {
-    width:80%;
+    width: 80%;
     margin: auto;
     text-align: center;
 }
@@ -13,7 +13,8 @@
 }
 
 .piece-card {
-    width: 250px; /* Tamaño pequeño */
+    width: 250px;
+    /* Tamaño pequeño */
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
@@ -93,27 +94,29 @@
     align-items: center;
     margin-bottom: 20px;
     padding: 20px;
-  }
-  
-  .type-display {
+}
+
+.type-display {
     flex: 1;
-  }
-  
-  .subcategory-filter, .search-box {
+}
+
+.subcategory-filter,
+.search-box {
     flex: 1;
     display: flex;
     align-items: center;
-  }
-  
-  .subcategory-filter label, .search-box label {
-    margin-right: 10px;
-  }
+}
 
-  .floating-cart-btn {
+.subcategory-filter label,
+.search-box label {
+    margin-right: 10px;
+}
+
+.floating-cart-btn {
     position: fixed;
     top: 120px;
     right: 40px;
-    background:  linear-gradient(to right, #ECC30B, #EF8A17);
+    background: linear-gradient(to right, #ECC30B, #EF8A17);
     color: white;
     border: none;
     border-radius: 50%;
@@ -126,20 +129,111 @@
     cursor: pointer;
     animation: bounce 2s infinite;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Asegúrate de que el botón esté en la parte superior */
-  }
-  
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
+    z-index: 1000;
+    /* Asegúrate de que el botón esté en la parte superior */
+}
+
+
+
+/* filtro de categoria en tienda */
+
+.subcategory-filter {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 200px;
+    margin: 16px auto;
+    margin-right: 10px;
+}
+
+.subcategory-filter label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.subcategory-filter select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.subcategory-filter select:focus {
+    border-color: #EF8A17;
+    box-shadow: 0 0 5px #EF8A17;
+    background-color: #fff;
+}
+
+.subcategory-filter option {
+    padding: 8px;
+}
+
+
+/* barra de busqueda en tienda */
+
+.search-box {
+    gap: 8px;
+    max-width: 300px;
+    margin: 16px auto;
+}
+
+.search-box label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: #EF8A17;
+    box-shadow: 0 0 5px #EF8A17;
+    background-color: #fff;
+}
+
+.search-box input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+
+
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
     }
+
     40% {
-      transform: translateY(-20px);
+        transform: translateY(-20px);
     }
+
     60% {
-      transform: translateY(-10px);
+        transform: translateY(-10px);
     }
-  }
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 600px) {
     .cards-container {
@@ -149,15 +243,19 @@
     }
 
     .piece-card {
-        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
-        max-width: 300px; /* Máximo ancho */
+        width: 100%;
+        /* Ocupa todo el ancho en pantallas pequeñas */
+        max-width: 300px;
+        /* Máximo ancho */
     }
+
     .filter-row {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .subcategory-filter, .search-box {
+    .subcategory-filter,
+    .search-box {
         width: 100%;
         margin-bottom: 10px;
     }
