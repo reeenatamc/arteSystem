@@ -29,6 +29,22 @@
   transform: translateY(-2px); /* Animación de elevación */
 }
 
+.btn-delete {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+
 .pieces-grid {
   display: flex;
   flex-wrap: wrap;

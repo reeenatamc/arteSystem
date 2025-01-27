@@ -118,6 +118,10 @@ export class FirebaseService {
     return this.firestore.collection('pieces').doc(pieceId).update({ verification });
   }
 
+  deletePiece(pieceId: string): Promise<void> {
+    return this.firestore.collection('pieces').doc(pieceId).delete();
+  }  
+
   getReviews(): Observable<Review[]> {
     return this.firestore.collection<Review>('reviews')
       .snapshotChanges()

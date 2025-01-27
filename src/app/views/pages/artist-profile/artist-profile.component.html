@@ -1,18 +1,22 @@
 <div *ngIf="artist" class="artist-profile-container">
   <div class="artist-name">
-    <p>{{ artist.name }}</p>
+    <p *ngIf="!isEditing">{{ artist.name }}</p>
+    <input *ngIf="isEditing" [(ngModel)]="artist.name" class="edit-name" placeholder="Editar nombre">
   </div>
   <div class="artist-image">
     <img [src]="artist.image" alt="{{ artist.name }}">
+    <div *ngIf="isEditing">
+      <input type="file" (change)="onImageSelected($event)">
+    </div>
   </div>
   <div class="artist-description">
     <p *ngIf="!isEditing">{{ artist.description }}</p>
     <textarea *ngIf="isEditing" [(ngModel)]="artist.description" class="edit-description"></textarea>
   </div>
   <div *ngIf="currentUser && currentUser.role === 'artist'" class="edit-buttons">
-    <button *ngIf="!isEditing" (click)="toggleEdit()">Editar Perfil</button>
-    <button *ngIf="isEditing" (click)="saveChanges()">Guardar Cambios</button>
-    <button *ngIf="isEditing" (click)="toggleEdit()">Cancelar</button>
+    <button *ngIf="!isEditing" (click)="toggleEdit()"> ✏️ </button>
+    <button *ngIf="isEditing" (click)="saveChanges()"> ✔️ </button>
+    <button *ngIf="isEditing" (click)="toggleEdit()"> ❌ </button>
   </div>
 </div>
 <div *ngIf="!artist">

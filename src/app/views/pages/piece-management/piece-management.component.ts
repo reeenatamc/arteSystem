@@ -58,4 +58,12 @@ export class PieceManagementComponent implements OnInit {
   changePage(page: number): void {
     this.currentPage = page;
   }
+
+  deletePiece(pieceId: string): void {
+    this.firebaseService.deletePiece(pieceId).then(() => {
+      this.loadPieces(); // Recargar las piezas después de eliminarlas
+    });
+  }
+  
+
 }

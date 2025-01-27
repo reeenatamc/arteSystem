@@ -37,6 +37,14 @@
   margin-left: -20px;
 }
 
+.intro-welcome {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #1D3557;
+  margin-bottom: 20px;
+}
+
+
 .intro-image {
   width: 40%;
   text-align: center;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../model/firebase.service';
+import { SupabaseService } from '../../../model/supabase.service';
 import { User } from '../../../interfaces/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../model/auth.service';
@@ -17,9 +18,11 @@ export class ArtistProfileComponent implements OnInit {
   searchQuery: string = '';
   currentUser!: User;
   isEditing: boolean = false; // Estado de edición
+  selectedImage: File | null = null; // Imagen seleccionada para cargar
 
   constructor(
     private firebaseService: FirebaseService,
+    private supabaseService: SupabaseService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
@@ -29,7 +32,6 @@ export class ArtistProfileComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       this.authService.currentUser$.subscribe(currentUser => {
-        console.log(currentUser);
         if (currentUser && currentUser.role === 'artist') {
           this.currentUser = currentUser;
           this.artist = currentUser;
@@ -46,7 +48,6 @@ export class ArtistProfileComponent implements OnInit {
     this.firebaseService.getArtistById(id).subscribe((artists: User[]) => {
       if (artists.length > 0) {
         this.artist = artists[0];
-        console.log(this.artist.id);
         this.loadPieces(this.artist.id);
       } else {
         console.error('No artist found with the given ID');
@@ -62,7 +63,9 @@ export class ArtistProfileComponent implements OnInit {
 
   onSearch(): void {
     if (this.searchQuery) {
-      this.pieces = this.pieces.filter(piece => piece.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      this.pieces = this.pieces.filter(piece =>
+        piece.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     } else {
       this.loadPieces(this.artistId || this.artist?.id || '');
     }
@@ -72,20 +75,31 @@ export class ArtistProfileComponent implements OnInit {
     this.router.navigate(['/pieceInfo'], { queryParams: { id: pieceId } });
   }
 
-  // Métodos para manejar la edición
   toggleEdit(): void {
     this.isEditing = !this.isEditing;
   }
 
-  saveChanges(): void {
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImage = input.files[0];
+    }
+  }
+
+  async saveChanges(): Promise<void> {
     if (this.artist) {
-      this.firebaseService.updateUser(this.artist).then(() => {
+      try {
+        if (this.selectedImage) {
+          const imageUrl = await this.supabaseService.uploadImage(this.selectedImage);
+          this.artist.image = imageUrl; // Actualizar la URL de la imagen en el artista
+        }
+        await this.firebaseService.updateUser(this.artist);
         this.isEditing = false;
         alert('Perfil actualizado con éxito');
-        if (this.artist) {
-          this.loadArtistInfo(this.artist.id);
-        }
-      });
+        this.loadArtistInfo(this.artist.id);
+      } catch (error) {
+        console.error('Error al guardar los cambios: ', error);
+      }
     }
   }
 }

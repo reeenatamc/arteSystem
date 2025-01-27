@@ -8,7 +8,7 @@
 
 .artist-name {
   flex: 1;
-  text-align: center;
+  text-align: left;
   margin: auto;
   font-size: 50px;
   font-weight: 600;
@@ -45,6 +45,49 @@ font-size: 20px;
 .artist-description p {
   margin: 0;
 }
+
+
+.edit-name {
+  width: 50%; /* Ajusta el ancho */
+  max-width: 300px; /* Limita el tamaño máximo */
+  font-size: 14px; /* Tamaño de fuente legible */
+  padding: 8px 12px; /* Espacio interno */
+  border: 2px solid #cba911; /* Color del borde */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #f9f9f9; /* Fondo suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+}
+
+.edit-name:focus {
+  border-color: #fd8904; /* Color del borde al enfocar */
+  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.3); /* Mayor énfasis */
+  outline: none; /* Quita el borde azul predeterminado */
+}
+
+.edit-name::placeholder {
+  color: #aaa; /* Color del texto del placeholder */
+  font-style: italic; /* Estilo cursivo */
+}
+
+input[type="file"] {
+  appearance: none; /* Eliminar el estilo predeterminado */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s, transform 0.2s;
+}
+
+
+input[type="file"]:active {
+  transform: scale(0.98);
+}
+
+
 
 .background-container {
   display: flex;
@@ -175,7 +218,6 @@ font-size: 20px;
   min-height: 100px; /* Altura mínima para comodidad */
   font-size: 16px; /* Tamaño de fuente legible */
   padding: 10px; /* Espacio interno */
-  border: 2px solid #6a11cb; /* Color de borde */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
   resize: vertical; /* Permite al usuario ajustar la altura */
@@ -184,11 +226,26 @@ font-size: 20px;
 }
 
 .edit-description:focus {
-  border-color: #2575fc; /* Color de borde al enfocar */
+  border-color: #fd8904; /* Color del borde al enfocar */
   box-shadow: 0 4px 10px rgba(37, 117, 252, 0.3); /* Mayor énfasis */
   outline: none; /* Quita el borde azul predeterminado */
 }
 
+
+.edit-button {
+  background-color: #D0CFCF; /* Color sólido */
+  border: none;
+  border-radius: 50%; /* Forma circular */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.2s;
+}
 
 .edit-buttons button {
   padding: 10px 20px;

@@ -25,9 +25,11 @@
           {{ piece.verification ? 'Verificado' : 'No Verificado' }}
         </p>
         <button *ngIf="!piece.verification" class="btn-verify" (click)="updatePieceVerification(piece.id, true)">Verificar</button>
+        <button class="btn-delete" (click)="deletePiece(piece.id)">Eliminar</button>
       </div>
     </div>
   </div>
+  
 
   <!-- Controles de paginación (repetidos abajo) -->
   <div class="pagination">
