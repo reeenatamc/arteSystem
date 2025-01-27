@@ -137,5 +137,18 @@ export class FirebaseService {
     return this.firestore.collection('reviews').doc(saleId).delete();
   }
 
+  getReviewsByPieceId(pieceId: string): Observable<Review[]> {
+    return this.firestore.collection<Review>('reviews', ref => ref.where('piece.id', '==', pieceId))
+      .snapshotChanges()
+      .pipe(
+        map((actions: any[]) => actions.map((a: any) => {
+          const data = a.payload.doc.data() as Review;
+          const id = a.payload.doc.id;
+          return { ...data, id };
+        }))
+      );
+  }
+  
+
  
 }

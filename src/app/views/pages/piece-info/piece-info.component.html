@@ -17,9 +17,18 @@
     </div>
     <div class="reviews">
       <h3>Reseñas</h3>
-      <div >
-        <p>asd</p>
-      </div>
+      <ng-container *ngIf="reviews$ | async as reviews">
+        <div *ngIf="reviews.length > 0; else noReviews">
+          <div *ngFor="let review of reviews" class="review">
+            <p><strong>{{ review.user.name }}</strong>: {{ review.description }}</p>
+            <p>Puntuación: {{ review.score }} / 5</p>
+          </div>
+        </div>
+        <ng-template #noReviews>
+          <p>No hay reseñas para esta obra.</p>
+        </ng-template>
+      </ng-container>
     </div>
+    
   </div>
 </div>
