@@ -69,6 +69,13 @@ export class CartComponent implements OnInit {
   }
 
   async submitForReview() {
+
+    // Verificar si se ha cargado un archivo
+    if (!this.selectedFile) {
+      alert('Por favor, carga un comprobante de pago antes de enviar.');
+      return;
+    }
+
     let paymentProofUrl = '';
 
     if (this.selectedFile) {

@@ -113,6 +113,7 @@
   border-radius: 6px;
   margin-top: 10px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  font-size: 14px;
 }
 .dar-resenia-button:hover{
   transform: scale(1.1); 
