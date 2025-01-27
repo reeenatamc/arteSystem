@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
     private firestoreService: FirebaseService,
     private supabaseService: SupabaseService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authService.currentUser$.subscribe(user => {
@@ -36,7 +36,7 @@ export class CartComponent implements OnInit {
 
     this.cartService.getCartItems().subscribe(items => {
       this.cartItems = items;
-      this.calculateTotalPrice(); 
+      this.calculateTotalPrice();
     });
   }
 
@@ -102,4 +102,6 @@ export class CartComponent implements OnInit {
       alert('There was an error submitting the sale. Please try again.');
     }
   }
+
+
 }
