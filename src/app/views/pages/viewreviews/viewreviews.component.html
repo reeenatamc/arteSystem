@@ -33,10 +33,10 @@
             </div>
           </div>
           <div class="review-actions" *ngIf="currentUser && (review.user.id === currentUser.id || currentUser.role === 'admin')">
-            <button *ngIf="!(selectedReview && selectedReview.id === review.id) && review.user.id === currentUser.id" (click)="editReview(review)">Editar</button>
-            <button *ngIf="selectedReview && selectedReview.id === review.id" (click)="saveReview()">Guardar</button>
-            <button *ngIf="selectedReview && selectedReview.id === review.id" (click)="cancelEdit()">Cancelar</button>
-            <button *ngIf="review.user.id === currentUser.id || currentUser.role === 'admin'" (click)="deleteReview(review.id)">Eliminar</button>
+            <button class = "edit-button" *ngIf="!(selectedReview && selectedReview.id === review.id) && review.user.id === currentUser.id" (click)="editReview(review)">Editar</button>
+            <button class = "save-button" *ngIf="selectedReview && selectedReview.id === review.id" (click)="saveReview()">Guardar</button>
+            <button class = "cancel-button" *ngIf="selectedReview && selectedReview.id === review.id" (click)="cancelEdit()">Cancelar</button>
+            <button class = "delete-button" *ngIf="review.user.id === currentUser.id || currentUser.role === 'admin'" (click)="deleteReview(review.id)">Eliminar</button>
           </div>
         </div>
       </div>
