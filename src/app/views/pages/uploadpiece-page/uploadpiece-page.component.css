@@ -3,19 +3,27 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 20px;
+  gap: 20px; /* Espaciado entre elementos */
 }
 
 .image-upload {
   flex: 1;
   margin-right: 20px;
-  border: 2px dashed #ccc;
+  border: 2px dashed #6c757d; /* Bordes gris claro */
   padding: 20px;
   text-align: center;
   height: 40vh;
   cursor: pointer;
-  background-color: #0080DC91;
+  background: linear-gradient(145deg, #0080dc, #5a9be6); /* Fondo degradado */
   color: white;
-  border-radius: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: all 0.3s ease;
+}
+
+.image-upload:hover {
+  background: linear-gradient(145deg, #5a9be6, #0080dc); /* Inversión del degradado */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Más sombra al pasar el cursor */
 }
 
 .image-upload-label {
@@ -42,7 +50,9 @@
 }
 
 .uploaded-images h3 {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #495057; /* Gris oscuro */
+  font-weight: bold;
 }
 
 .uploaded-images ul {
@@ -51,17 +61,29 @@
 }
 
 .uploaded-images li {
-  background-color: #f0f0f0;
-  margin-bottom: 5px;
-  padding: 10px;
-  border-radius: 5px;
+  background: #ffffff; /* Fondo blanco */
+  margin-bottom: 10px; /* Espaciado entre celdas */
+  padding: 15px; /* Más espacio dentro de la celda */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #e0e0e0; /* Bordes sutiles */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombras suaves */
+  color: #333333; /* Texto oscuro */
+  transition: all 0.3s ease;
+}
+
+.uploaded-images li:hover {
+  background: #f8f9fa; /* Fondo más claro al pasar el cursor */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Más sombra */
+  transform: translateY(-3px); /* Animación al pasar el cursor */
 }
 
 .form-fields {
   flex: 1;
   padding: 20px;
-  border: 1px solid #DDDDDD;
-  border-radius: 5px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  background: #ffffff; /* Fondo blanco */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para las celdas */
 }
 
 .form-fields form div {
@@ -71,30 +93,80 @@
 .form-fields form label {
   display: block;
   margin-bottom: 5px;
+  color: #495057; /* Gris oscuro */
+  font-weight: bold;
 }
 
 .form-fields form input,
 .form-fields form textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   box-sizing: border-box;
-  border: 1px solid #DDDDDD;
-  border-radius: 5px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Fondo suave */
+  color: #495057;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-fields form input:focus,
+.form-fields form textarea:focus {
+  border-color: #0080dc; /* Resaltar al enfoque */
+  box-shadow: 0 0 5px rgba(0, 128, 220, 0.2);
+  outline: none;
 }
 
 .dimensions {
   display: flex;
   flex-direction: column;
+  gap: 10px; /* Espaciado entre inputs */
 }
 
 .dimension-inputs {
   display: flex;
-  gap: 10px;
+  gap: 15px; /* Más espacio entre inputs */
 }
 
 .dimension-inputs input {
   flex: 1;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  color: #495057;
 }
+
+button[type="submit"] {
+  background: linear-gradient(90deg, #0080dc, #4caf50);
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #4caf50, #0080dc);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+button[type="submit"] .icon {
+  font-size: 1.5em;
+}
+
 
 
 .loading-indicator {

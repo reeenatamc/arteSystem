@@ -10,18 +10,23 @@
 }
 
 .filter-buttons button {
-  padding: 5px 10px;
-  margin: 0 5px;
-  background-color: #007bff;
+  padding: 8px 16px;
+  margin: 0 8px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px; /* Botones redondeados */
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: all 0.3s ease;
 }
 
 .filter-buttons button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #0056b3, #007bff); /* Inversión del degradado */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Más sombra al pasar el cursor */
+  transform: translateY(-2px); /* Animación de elevación */
 }
 
 .pieces-grid {
@@ -65,19 +70,23 @@
 }
 
 .btn-verify {
-  padding: 5px 10px;
-  background-color: #28a745;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, #28a745, #218838);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 1em;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .btn-verify:hover {
-  background-color: #218838;
+  background: linear-gradient(90deg, #218838, #28a745);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
-
 .pagination {
   display: flex;
   justify-content: center;

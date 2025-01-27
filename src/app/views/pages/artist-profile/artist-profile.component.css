@@ -113,19 +113,34 @@ font-size: 20px;
   object-fit: cover; /* Asegura que la imagen mantenga su proporción */
 }
 .search-container {
-    width: 76.6%;
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+  justify-content: center;
+  margin: 20px 0; /* Añade espacio arriba y abajo */
 }
 
 .search-container input {
-  padding: 5px;
+  width: 80%; /* Ajusta el ancho del input */
+  max-width: 400px; /* Limita el tamaño máximo */
+  padding: 10px 15px;
   font-size: 16px;
-  border-radius: 20px; /* Redondea los bordes */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra debajo */
-  border: 1px solid #ccc; /* Opcional: agrega un borde */
+  border: 2px solid #ddd; /* Borde más definido */
+  border-radius: 25px; /* Bordes completamente redondeados */
+  background-color: #f9f9f9; /* Fondo suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: box-shadow 0.3s, border-color 0.3s; /* Transiciones suaves */
 }
+
+.search-container input:focus {
+  outline: none; /* Quita el borde predeterminado */
+  border-color: #6a11cb; /* Cambia el color del borde */
+  box-shadow: 0 4px 10px rgba(106, 17, 203, 0.3); /* Sombra más intensa */
+}
+
+.search-container input::placeholder {
+  color: #aaa; /* Color de texto del placeholder */
+  font-style: italic; /* Estilo cursivo */
+}
+
 
 .verification-true {
   background-color: green;
@@ -155,25 +170,58 @@ font-size: 20px;
     margin-bottom: 2%;
 }
 
-.edit-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+.edit-description {
+  width: 100%; /* Ajusta al ancho del contenedor */
+  min-height: 100px; /* Altura mínima para comodidad */
+  font-size: 16px; /* Tamaño de fuente legible */
+  padding: 10px; /* Espacio interno */
+  border: 2px solid #6a11cb; /* Color de borde */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+  resize: vertical; /* Permite al usuario ajustar la altura */
+  background-color: #f9f9f9; /* Fondo suave */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
 }
 
+.edit-description:focus {
+  border-color: #2575fc; /* Color de borde al enfocar */
+  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.3); /* Mayor énfasis */
+  outline: none; /* Quita el borde azul predeterminado */
+}
+
+
 .edit-buttons button {
-  padding: 5px 10px;
-  background-color: #007bff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
   color: white;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
 }
 
 .edit-buttons button:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+  opacity: 0.9;
 }
+
+.edit-buttons button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.edit-buttons button:first-of-type {
+  background: linear-gradient(45deg, #34d399, #059669); /* Verde para "Editar Perfil" */
+}
+
+.edit-buttons button:last-of-type {
+  background: linear-gradient(45deg, #f8a571, #dc7826); /* Rojo para "Cancelar" */
+}
+
 @media (max-width: 768px) {
 
     .artist-profile-container {

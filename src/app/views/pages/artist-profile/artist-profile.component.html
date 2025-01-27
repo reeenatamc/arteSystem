@@ -7,7 +7,7 @@
   </div>
   <div class="artist-description">
     <p *ngIf="!isEditing">{{ artist.description }}</p>
-    <textarea *ngIf="isEditing" [(ngModel)]="artist.description"></textarea>
+    <textarea *ngIf="isEditing" [(ngModel)]="artist.description" class="edit-description"></textarea>
   </div>
   <div *ngIf="currentUser && currentUser.role === 'artist'" class="edit-buttons">
     <button *ngIf="!isEditing" (click)="toggleEdit()">Editar Perfil</button>
