@@ -1,14 +1,12 @@
 .users-container {
-  width: 80%;
+  width: 70%;
   margin: auto;
   text-align: center;
-  padding: 20px;
 }
 
 .user-list {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
 }
 
 .users-container ul {
@@ -24,36 +22,22 @@
 .user-card {
   display: flex;
   align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #e0e0e0;
-  width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  margin-bottom: 10px;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  width: 70%;
+  border-radius: 8px; /* Añadido para redondear los bordes del user-card */
 }
 
 .user-image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  margin-right: 15px;
-  border: 2px solid #f44336;
+  margin-right: 10px;
 }
 
 .user-info {
   flex-grow: 1;
   text-align: left;
-}
-
-.user-info h3 {
-  font-size: 1.1em;
-  color: #333;
-}
-
-.user-info p {
-  font-size: 0.9em;
-  color: #666;
 }
 
 .user-actions {
@@ -66,7 +50,7 @@
   flex-direction: column;
   padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 15px; /* Aumentado para hacer el formulario más redondeado */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 48%;
 }
@@ -84,20 +68,18 @@
   padding: 5px;
   margin-top: 5px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.editbutton, .deletebutton, .btn-save, .btn-cancel {
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.9em;
+  border-radius: 10px; /* Aumentado para hacer los inputs y textarea más redondeados */
 }
 
 .editbutton {
-  background-color: #BDBDBD;
+  background-color: #218838;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 15px;
+  padding: 7px 16px;
 }
 
 .editbutton:hover {
@@ -107,6 +89,12 @@
 .deletebutton {
   background-color: #FF4C4C;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 15px;
+  padding: 10px 20px;
 }
 
 .deletebutton:hover {
@@ -114,8 +102,14 @@
 }
 
 .btn-save {
+  padding: 5px 10px;
   background-color: #28a745;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 25px;
 }
 
 .btn-save:hover {
@@ -123,8 +117,13 @@
 }
 
 .btn-cancel {
+  padding: 5px 10px;
   background-color: #dc3545;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn-cancel:hover {
@@ -174,5 +173,6 @@
     padding: 5px;
     border-bottom: 1px solid #ddd;
     width: 90%;
+    border-radius: 8px; /* Añadido para mantener la redondez en móviles */
   }
 }
