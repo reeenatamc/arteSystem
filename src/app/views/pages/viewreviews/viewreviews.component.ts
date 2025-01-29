@@ -5,7 +5,6 @@ import { AuthService } from '../../../model/auth.service';
 import { Review } from '../../../interfaces/review.model';
 import { LoadingService } from '../../../services/loading.service';
 
-
 @Component({
   selector: 'app-viewreviews',
   templateUrl: './viewreviews.component.html',
@@ -14,8 +13,10 @@ import { LoadingService } from '../../../services/loading.service';
 export class ViewreviewsComponent implements OnInit {
   currentUser: any;
   reviews: Review[] = [];
+  filteredReviews: Review[] = [];
   selectedReview: Review | null = null;
   isLoading: boolean = false;
+  searchQuery: string = '';
 
   // Variables para la paginación
   currentPage: number = 1;
@@ -32,6 +33,7 @@ export class ViewreviewsComponent implements OnInit {
     this.loadingService.loading$.subscribe((isLoading) => {
       this.isLoading = isLoading;
     });
+
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
@@ -40,14 +42,20 @@ export class ViewreviewsComponent implements OnInit {
   }
 
   loadReviews(): void {
-    this.loadingService.show(); 
+    this.loadingService.show();
 
     this.firebaseService.getReviews().subscribe((reviews: Review[]) => {
       this.reviews = reviews;
-      console.log(this.reviews);
+      this.filteredReviews = reviews; // Inicialmente, las reseñas filtradas son todas
       this.loadingService.hide();
-
     });
+  }
+
+  applyFilters(): void {
+    this.filteredReviews = this.reviews.filter(review =>
+      review.piece.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+    this.currentPage = 1; // Reiniciar a la primera página después del filtrado
   }
 
   editReview(review: Review): void {
@@ -81,13 +89,13 @@ export class ViewreviewsComponent implements OnInit {
 
   // Métodos para la paginación
   get totalPages(): number {
-    return Math.ceil(this.reviews.length / this.reviewsPerPage);
+    return Math.ceil(this.filteredReviews.length / this.reviewsPerPage);
   }
 
   get paginatedReviews(): Review[] {
     const start = (this.currentPage - 1) * this.reviewsPerPage;
     const end = start + this.reviewsPerPage;
-    return this.reviews.slice(start, end);
+    return this.filteredReviews.slice(start, end);
   }
 
   changePage(page: number): void {
