@@ -1,26 +1,30 @@
-<div class="profile-container">
+<div *ngIf="!isLoading">
+
+  <div class="profile-container">
     <div class="profile-left">
       <div class="user-profile-container">
         <h1>Editar perfil</h1>
-        <p>Mantén la privacidad de tus datos personales. Cualquier usuario que pueda ver tu perfil puede ver la información que añades aquí.</p>
-        
+        <p>Mantén la privacidad de tus datos personales. Cualquier usuario que pueda ver tu perfil puede ver la
+          información que añades aquí.</p>
+
         <div class="profile-header" *ngIf="user">
           <div class="profile-image-container">
-            <img [src]="previewImage || user.image || '/assets/default-profile.png'" alt="{{ user.name }}" class="profile-image">
+            <img [src]="previewImage || user.image || '/assets/default-profile.png'" alt="{{ user.name }}"
+              class="profile-image">
             <button *ngIf="isEditing" (click)="triggerImageUpload()" class="modify-image">Modificar</button>
             <input type="file" #fileInput (change)="onImageSelected($event)" style="display: none;">
           </div>
-          
+
           <div class="profile-info">
             <div class="form-group">
               <label for="name">Nombre</label>
-              <input id="name" type="text" [(ngModel)]="user.name" placeholder="Nombre" [disabled]="!isEditing" class="input-field">
+              <input id="name" type="text" [(ngModel)]="user.name" placeholder="Nombre" [disabled]="!isEditing"
+                class="input-field">
             </div>
             <div class="form-group">
               <label for="email">Correo electrónico</label>
-              <input id="email" type="email" [(ngModel)]="user.email" placeholder="Correo electrónico" 
-                     [disabled]="!isEditing" class="input-field" 
-                     pattern=".*@.*" required #emailInput="ngModel">
+              <input id="email" type="email" [(ngModel)]="user.email" placeholder="Correo electrónico"
+                [disabled]="!isEditing" class="input-field" pattern=".*@.*" required #emailInput="ngModel">
               <div *ngIf="isEditing && emailInput.invalid && (emailInput.dirty || emailInput.touched)">
                 <div *ngIf="emailInput.errors?.['required']">El correo electrónico es requerido.</div>
                 <div *ngIf="emailInput.errors?.['pattern']">El correo electrónico debe contener un &64;.</div>
@@ -28,18 +32,20 @@
             </div>
             <div class="form-group">
               <label for="phone">Teléfono</label>
-              <input id="phone" type="tel" [(ngModel)]="user.phone" placeholder="Teléfono" [disabled]="!isEditing" class="input-field">
+              <input id="phone" type="tel" [(ngModel)]="user.phone" placeholder="Teléfono" [disabled]="!isEditing"
+                class="input-field">
             </div>
           </div>
         </div>
-  
+
         <div class="profile-details" *ngIf="user">
           <div class="form-group">
             <label for="description">Descripción</label>
-            <textarea id="description" [(ngModel)]="user.description" placeholder="Cuenta tu historia" [disabled]="!isEditing" class="input-field textarea"></textarea>
+            <textarea id="description" [(ngModel)]="user.description" placeholder="Cuenta tu historia"
+              [disabled]="!isEditing" class="input-field textarea"></textarea>
           </div>
         </div>
-        
+
         <div class="profile-actions">
           <button *ngIf="!isEditing" (click)="toggleEdit()"> ✏️ </button>
           <button *ngIf="isEditing" (click)="saveChanges()" class="confirm-button">✔️</button>
@@ -47,21 +53,24 @@
         </div>
       </div>
     </div>
-    
+
     <div class="profile-right">
       <div class="change-password-container">
         <h2>Cambiar contraseña</h2>
         <div class="form-group">
           <label for="currentPassword">Contraseña actual</label>
-          <input id="currentPassword" type="password" [(ngModel)]="currentPassword" placeholder="Contraseña actual" class="input-field">
+          <input id="currentPassword" type="password" [(ngModel)]="currentPassword" placeholder="Contraseña actual"
+            class="input-field">
         </div>
         <div class="form-group">
           <label for="newPassword">Nueva contraseña</label>
-          <input id="newPassword" type="password" [(ngModel)]="newPassword" placeholder="Nueva contraseña" class="input-field">
+          <input id="newPassword" type="password" [(ngModel)]="newPassword" placeholder="Nueva contraseña"
+            class="input-field">
         </div>
         <div class="form-group">
           <label for="confirmPassword">Confirmar nueva contraseña</label>
-          <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword" placeholder="Confirmar nueva contraseña" class="input-field">
+          <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword"
+            placeholder="Confirmar nueva contraseña" class="input-field">
         </div>
         <div class="password-actions">
           <button (click)="changePassword()">Cambiar contraseña</button>
@@ -69,3 +78,4 @@
       </div>
     </div>
   </div>
+</div>

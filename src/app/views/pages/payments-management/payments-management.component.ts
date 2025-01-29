@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../model/firebase.service';
 import { Sale } from '../../../interfaces/sale';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-payments-management',
@@ -9,20 +11,29 @@ import { Sale } from '../../../interfaces/sale';
 })
 export class PaymentsManagementComponent implements OnInit {
   sales: Sale[] = [];
+  isLoading: boolean = false;
+
 
   // Variables para la paginación
   currentPage: number = 1;
   salesPerPage: number = 4;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
     this.loadSales();
   }
 
   loadSales(): void {
+    this.loadingService.show(); 
+
     this.firebaseService.getSales().subscribe((sales: Sale[]) => {
       this.sales = sales;
+      this.loadingService.hide();
+
     });
   }
 

@@ -5,6 +5,8 @@ import { SupabaseService } from '../../../model/supabase.service';
 import { AuthService } from '../../../model/auth.service';
 import { User } from '../../../interfaces/user.model';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-upload-piece',
@@ -29,14 +31,31 @@ export class UploadPieceComponent {
   selectedFile: File | null = null;
   currentUser: User | null = null;
   subcategories: string[] = [];
+  isLoading: boolean = false;
+
 
   constructor(private firestore: AngularFirestore, private supabaseService: SupabaseService, 
-    private authService: AuthService,  private router: Router) {}
+    private authService: AuthService,  private router: Router, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    // Mostrar el spinner al cargar la página
+    this.loadingService.show(); 
+
+    // Suscripción para obtener el usuario actual
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
+
+    // Suscripción para verificar si se debe mostrar el spinner (si se está cargando algo más)
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+
+    // Simulamos la carga de los datos del formulario o algún recurso externo
+    setTimeout(() => {
+      // Ocultamos el spinner cuando el formulario y datos estén cargados
+      this.loadingService.hide();
+    }, 1000);
   }
 
   onFileSelected(event: any): void {
@@ -80,6 +99,7 @@ export class UploadPieceComponent {
 
         console.log('Piece uploaded successfully');
         this.submitForReview();
+
       } catch (error) {
         console.error('Error uploading piece: ', error);
       }

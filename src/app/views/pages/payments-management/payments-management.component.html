@@ -1,3 +1,5 @@
+<div *ngIf="!isLoading">
+
 <div *ngIf="sales.length > 0; else noSales">
   <!-- Controles de paginación -->
   <div class="pagination">
@@ -37,5 +39,9 @@
   </div>
 </div>
 <ng-template #noSales>
-  <p>No tienes pedidos por verificar.</p>
+  <div class="no-sales-container">
+    <img src="\assets\media\error.svg" alt="Sin pedidos" class="no-sales-image">
+    <p class = "pedidos-text">Estas al día. No tienes pedidos por verificar.</p>
+  </div>
 </ng-template>
+</div>

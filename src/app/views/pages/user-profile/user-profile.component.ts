@@ -4,6 +4,8 @@ import { SupabaseService } from '../../../model/supabase.service';
 import { User } from '../../../interfaces/user.model';
 import { NgModel } from '@angular/forms'; // Importación necesaria para NgModel
 import { getAuth, updateEmail, updateProfile, sendEmailVerification } from 'firebase/auth';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -16,6 +18,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   selectedImage: File | null = null;
   newSkill: string = '';
   previewImage: string | ArrayBuffer | null = null;
+  isLoading: boolean = false;
+
   
   // Variables para el cambio de contraseña
   currentPassword: string = '';
@@ -27,13 +31,27 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.show(); 
+
     this.authService.currentUser$.subscribe(user => {
       this.user = user;
     });
+
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+
+    // Simulamos la carga de los datos del formulario o algún recurso externo
+    setTimeout(() => {
+      // Ocultamos el spinner cuando el formulario y datos estén cargados
+      this.loadingService.hide();
+    }, 1000);
+
   }
 
   ngOnDestroy(): void {

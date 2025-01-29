@@ -134,6 +134,22 @@
   opacity: 0.8;
 }
 
+.pedidos-text{
+  text-align: center;
+  font-weight: lighter;
+  margin-top: 20px;
+  color: #434343;
+}
+.no-sales-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-sales-image {
+  width: 40%; /* Ajusta el tamaño según necesites */
+  margin-bottom: 10px;
+}
+
 /* Media query para dispositivos móviles */
 @media (max-width: 600px) {
   .sale-card {

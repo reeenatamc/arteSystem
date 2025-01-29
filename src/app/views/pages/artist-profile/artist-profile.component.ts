@@ -65,10 +65,11 @@ export class ArtistProfileComponent implements OnInit {
   }
 
   loadPieces(authorId: string): void {
+    this.loadingService.show();
+
     this.firebaseService.getPiecesByAuthor(authorId).subscribe((pieces: Piece[]) => {
       this.pieces = pieces;
       this.loadingService.hide();
-
     });
   }
 

@@ -4,6 +4,8 @@ import { SupabaseService } from '../../../model/supabase.service';
 import { User } from '../../../interfaces/user.model';
 import { NgModel } from '@angular/forms'; // Importación necesaria para NgModel
 import { getAuth, updateEmail, updateProfile, sendEmailVerification } from 'firebase/auth';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-artist-edit-profile',
@@ -16,6 +18,8 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
   selectedImage: File | null = null;
   newSkill: string = '';
   previewImage: string | ArrayBuffer | null = null;
+  isLoading: boolean = true;
+
   
   // Variables para el cambio de contraseña
   currentPassword: string = '';
@@ -27,16 +31,32 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private loadingService: LoadingService
+
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.authService.currentUser$.subscribe(user => {
       this.user = user;
     });
+    setTimeout(() => {
+      this.isLoading = false;  // Desactivamos el spinner después de cargar las tarjetas
+      this.loadingService.hide();  // Ocultamos el spinner
+    }, 500);  
+    // this.loadingService.show();
+
+    // this.loadingService.loading$.subscribe((isLoading) => {
+    //   this.isLoading = isLoading;
+    // });
+    // this.authService.currentUser$.subscribe(user => {
+    //   this.user = user;
+    // });
   }
 
   ngOnDestroy(): void {
+
     // Limpiamos la URL del objeto si se creó una vista previa
     if (this.previewImage && typeof this.previewImage === 'string') {
       URL.revokeObjectURL(this.previewImage);
