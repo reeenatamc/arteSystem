@@ -110,10 +110,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             // No actualices Firestore hasta que el correo sea verificado
             return;
           }
-  
-          // Aquí iría el código para actualizar otras partes del perfil si es necesario
-          // ...
-  
           // Actualizar el usuario en Firestore usando el método del servicio
           await this.authService.updateUserInFirestore(this.user);
   

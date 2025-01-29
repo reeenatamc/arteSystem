@@ -45,14 +45,6 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
       this.isLoading = false;  // Desactivamos el spinner después de cargar las tarjetas
       this.loadingService.hide();  // Ocultamos el spinner
     }, 500);  
-    // this.loadingService.show();
-
-    // this.loadingService.loading$.subscribe((isLoading) => {
-    //   this.isLoading = isLoading;
-    // });
-    // this.authService.currentUser$.subscribe(user => {
-    //   this.user = user;
-    // });
   }
 
   ngOnDestroy(): void {
@@ -112,10 +104,6 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
             // No actualices Firestore hasta que el correo sea verificado
             return;
           }
-  
-          // Aquí iría el código para actualizar otras partes del perfil si es necesario
-          // ...
-  
           // Actualizar el usuario en Firestore usando el método del servicio
           await this.authService.updateUserInFirestore(this.user);
   
