@@ -126,6 +126,26 @@
   margin-top: 1rem;
 }
 
+.ver-mas-btn {
+  background: none;
+  border: none;
+  color: #007bff; /* Azul similar a los enlaces */
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.ver-mas-btn:hover {
+  color: #0056b3; /* Color más oscuro al pasar el mouse */
+  text-decoration: none;
+}
+
+.ver-mas-btn:active {
+  color: #003d80; /* Color aún más oscuro al hacer clic */
+}
+
+
 .floating-cart-btn {
   position: fixed;
   top: 120px;
