@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../model/firebase.service';
 import { Piece } from '../../../interfaces/piece.model';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-piece-management',
@@ -10,21 +12,29 @@ import { Piece } from '../../../interfaces/piece.model';
 export class PieceManagementComponent implements OnInit {
   pieces: Piece[] = [];
   filteredPieces: Piece[] = [];
+  isLoading: boolean = false;
 
   // Variables para la paginación
   currentPage: number = 1;
   piecesPerPage: number = 4;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
     this.loadPieces();
   }
 
   loadPieces(): void {
+    this.loadingService.show(); 
+
     this.firebaseService.getPieces().subscribe((pieces: Piece[]) => {
       this.pieces = pieces;
       this.filteredPieces = pieces;
+      this.loadingService.hide();
+
     });
   }
 

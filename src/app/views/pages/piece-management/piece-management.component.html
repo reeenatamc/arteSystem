@@ -1,40 +1,47 @@
-<div class="pieces-container">
-  <h2>Gestión de Obras de arte</h2>
-  <div class="filter-buttons">
-    <button (click)="filterPieces('all')">Todas</button>
-    <button (click)="filterPieces('verified')">Verificadas</button>
-    <button (click)="filterPieces('not-verified')">No Verificadas</button>
-  </div>
 
-  <!-- Controles de paginación -->
-  <div class="pagination">
-    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
-      {{ i + 1 }}
-    </button>
-  </div>
 
-  <div class="pieces-grid">
-    <div *ngFor="let piece of paginatedPieces" class="piece-card">
-      <img [src]="piece.image" alt="{{ piece.name }}" class="piece-image">
-      <div class="piece-info">
-        <h3>{{ piece.name }}</h3>
-        <p>Precio: {{ piece.price | currency }}</p>
-        <p>Stock: {{ piece.stock }}</p>
-        <p>Dimensiones: {{ piece.height }} x {{ piece.width }}</p>
-        <p [ngClass]="piece.verification ? 'verified' : 'not-verified'">
-          {{ piece.verification ? 'Verificado' : 'No Verificado' }}
-        </p>
-        <button *ngIf="!piece.verification" class="btn-verify" (click)="updatePieceVerification(piece.id, true)">Verificar</button>
-        <button class="btn-delete" (click)="deletePiece(piece.id)">Eliminar</button>
+<div *ngIf="!isLoading">
+  <div class="pieces-container">
+    <h2>Gestión de Obras de arte</h2>
+    <div class="filter-buttons">
+      <button (click)="filterPieces('all')">Todas</button>
+      <button (click)="filterPieces('verified')">Verificadas</button>
+      <button (click)="filterPieces('not-verified')">No Verificadas</button>
+    </div>
+
+    <!-- Controles de paginación -->
+    <div class="pagination">
+      <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+    </div>
+
+    <div class="pieces-grid">
+      <div *ngFor="let piece of paginatedPieces" class="piece-card">
+        <img [src]="piece.image" alt="{{ piece.name }}" class="piece-image">
+        <div class="piece-info">
+          <h3>{{ piece.name }}</h3>
+          <p>Precio: {{ piece.price | currency }}</p>
+          <p>Stock: {{ piece.stock }}</p>
+          <p>Dimensiones: {{ piece.height }} x {{ piece.width }}</p>
+          <p [ngClass]="piece.verification ? 'verified' : 'not-verified'">
+            {{ piece.verification ? 'Verificado' : 'No Verificado' }}
+          </p>
+          <button *ngIf="!piece.verification" class="btn-verify"
+            (click)="updatePieceVerification(piece.id, true)">Verificar</button>
+          <button class="btn-delete" (click)="deletePiece(piece.id)">Eliminar</button>
+        </div>
       </div>
     </div>
-  </div>
-  
 
-  <!-- Controles de paginación (repetidos abajo) -->
-  <div class="pagination">
-    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
-      {{ i + 1 }}
-    </button>
+
+    <!-- Controles de paginación (repetidos abajo) -->
+    <div class="pagination">
+      <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+    </div>
   </div>
 </div>

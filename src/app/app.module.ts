@@ -30,6 +30,7 @@ import { UserProfileComponent } from './views/pages/user-profile/user-profile.co
 import { ArtistEditProfileComponent } from './views/pages/artist-edit-profile/artist-edit-profile.component';
 import { LoadingSpinnerComponent } from './views/components/loading-spinner/loading-spinner.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
