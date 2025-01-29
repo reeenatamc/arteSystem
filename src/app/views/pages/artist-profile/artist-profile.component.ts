@@ -5,6 +5,8 @@ import { User } from '../../../interfaces/user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../model/auth.service';
 import { Piece } from '../../../interfaces/piece.model';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-artist-profile',
@@ -19,16 +21,19 @@ export class ArtistProfileComponent implements OnInit {
   currentUser!: User;
   isEditing: boolean = false; // Estado de edición
   selectedImage: File | null = null; // Imagen seleccionada para cargar
+  isLoading: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
     private supabaseService: SupabaseService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       this.authService.currentUser$.subscribe(currentUser => {
@@ -52,6 +57,8 @@ export class ArtistProfileComponent implements OnInit {
       } else {
         console.error('No artist found with the given ID');
       }
+      this.isLoading = false;
+      this.loadingService.hide();
     });
   }
 

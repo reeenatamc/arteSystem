@@ -27,7 +27,8 @@
   <div class="services-container">
     <div class="servicios">
       <h2>Servicios</h2>
-      <p>Más servicios que ofrece el artista incluyen opciones personalizadas, colaboraciones, talleres y asesorías creativas.</p>
+      <p>Más servicios que ofrece el artista incluyen opciones personalizadas, colaboraciones, talleres y asesorías
+        creativas.</p>
       <ul class="servicios-list">
         <li>Retratos</li>
         <li>Abstracto</li>
@@ -42,7 +43,8 @@
     <div class="artworks">
       <div *ngFor="let artwork of pieces" class="artwork-card" (click)="onCardClick(artwork.id)">
         <img [src]="artwork.image" alt="{{ artwork.name }}">
-        <p *ngIf="currentUser && artist && currentUser.id === artist.id" [ngClass]="{'verification-true': artwork.verification, 'verification-false': !artwork.verification}">
+        <p *ngIf="currentUser && artist && currentUser.id === artist.id"
+          [ngClass]="{'verification-true': artwork.verification, 'verification-false': !artwork.verification}">
           {{ artwork.verification ? 'Verificado' : 'Pendiente' }}
         </p>
       </div>

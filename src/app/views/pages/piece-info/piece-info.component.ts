@@ -9,6 +9,8 @@ import { AuthService } from '../../../model/auth.service';
 import { User } from '../../../interfaces/user.model';
 import { CartService } from '../../../services/cart.service';
 import { Router} from '@angular/router';
+import { LoadingService } from '../../../services/loading.service';
+
 
 
 @Component({
@@ -22,6 +24,8 @@ export class PieceInfoComponent implements OnInit {
   piece$: Observable<Piece[]> | null = null;
   reviews$: Observable<Review[]> | null = null;
   currentUser: User | null = null;
+  isLoading: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -29,15 +33,27 @@ export class PieceInfoComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService, 
     private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.show();
+
     // Obtener los parámetros de la URL
     this.route.queryParams.subscribe(params => {
       this.pieceId = params['id'];
       if (this.pieceId) {
         this.piece$ = this.firestoreService.getPiecesById(this.pieceId);
         this.reviews$ = this.firestoreService.getReviewsByPieceId(this.pieceId);
+        
+        // Oculta el spinner después de cargar los datos
+        this.piece$.subscribe(() => {
+          this.loadingService.hide();
+        });
+        
+        this.reviews$.subscribe(() => {
+          this.loadingService.hide();
+        });
       }
     });
 
