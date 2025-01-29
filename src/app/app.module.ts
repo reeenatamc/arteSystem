@@ -28,6 +28,7 @@ import { PaymentsManagementComponent } from './views/pages/payments-management/p
 import { PieceManagementComponent } from './views/pages/piece-management/piece-management.component';
 import { UserProfileComponent } from './views/pages/user-profile/user-profile.component';
 import { ArtistEditProfileComponent } from './views/pages/artist-edit-profile/artist-edit-profile.component';
+import { LoadingSpinnerComponent } from './views/components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ArtistEditProfileComponent } from './views/pages/artist-edit-profile/ar
     PieceManagementComponent,
     UserProfileComponent,
     ArtistEditProfileComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
