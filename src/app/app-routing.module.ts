@@ -18,6 +18,7 @@ import { UsersManagementComponent } from './views/pages/users-management/users-m
 import { PaymentsManagementComponent } from './views/pages/payments-management/payments-management.component';
 import { PieceManagementComponent } from './views/pages/piece-management/piece-management.component';
 import { UserProfileComponent } from './views/pages/user-profile/user-profile.component'; 
+import { ArtistEditProfileComponent } from './views/pages/artist-edit-profile/artist-edit-profile.component'; 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,10 +27,8 @@ const routes: Routes = [
   { path: 'check', component: CheckComponent },
   { path: 'profileartist', component: ArtistProfileComponent },
   { path: 'register', component: RegisterPageComponent },
-  // Rutas del artista
   { path: 'uploadPiece', component: UploadPieceComponent },
   { path: 'pieceInfo', component: PieceInfoComponent },
-  // Rutas del cliente
   { path: 'userprofile', component: UserProfileComponent },
   { path: 'clientHome', component: CategoryComponent },
   { path: 'myreviews', component: ViewreviewsComponent },
@@ -39,10 +38,10 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: MisPedidospageComponent },
   { path: 'myreviews', component: ViewreviewsComponent },
-  // Rutas del admin
   { path: 'usersManagement', component: UsersManagementComponent },
   { path: 'paymentsManagement', component: PaymentsManagementComponent },
   { path: 'pieceManagement', component: PieceManagementComponent },
+  { path: 'artistEdit', component: ArtistEditProfileComponent },
 ];
 
 @NgModule({

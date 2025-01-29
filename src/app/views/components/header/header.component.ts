@@ -45,10 +45,12 @@ export class HeaderComponent implements OnInit {
           ];
           break;
         case 'artist':
+          
           this.options = [
             { label: 'Home', route: '/home' },
             { label: 'Arte', route: '/profileartist' },
-            { label: 'Publicar', route: '/uploadPiece'},         
+            { label: 'Publicar', route: '/uploadPiece'},
+            { label: 'Perfil', route: '/artistEdit'},            
           ];
           break;
         case 'admin':

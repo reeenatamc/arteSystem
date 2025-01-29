@@ -38,17 +38,6 @@
           <label for="description">Descripción</label>
           <textarea id="description" [(ngModel)]="user.description" placeholder="Cuenta tu historia" [disabled]="!isEditing" class="input-field textarea"></textarea>
         </div>
-        
-        <div class="form-group" *ngIf="isEditing">
-          <label for="skills">Habilidades</label>
-          <input id="skills" [(ngModel)]="newSkill" (keyup.enter)="addSkill()" placeholder="Añadir habilidad y presiona Enter" class="input-field" [disabled]="!isEditing">
-          <ul>
-            <li *ngFor="let skill of user.skills">
-              {{ skill.name }}
-              <button (click)="removeSkill(skill)" *ngIf="isEditing">❌</button>
-            </li>
-          </ul>
-        </div>
       </div>
       
       <div class="profile-actions">
@@ -61,7 +50,7 @@
   
   <div class="profile-right">
     <div class="change-password-container">
-      <h2>Olvidaste tu contraseña</h2>
+      <h2>Cambiar contraseña</h2>
       <div class="form-group">
         <label for="currentPassword">Contraseña actual</label>
         <input id="currentPassword" type="password" [(ngModel)]="currentPassword" placeholder="Contraseña actual" class="input-field">
