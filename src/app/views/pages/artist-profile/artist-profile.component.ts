@@ -33,7 +33,9 @@ export class ArtistProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadingService.show();
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       this.authService.currentUser$.subscribe(currentUser => {
@@ -50,6 +52,8 @@ export class ArtistProfileComponent implements OnInit {
   }
 
   loadArtistInfo(id: string): void {
+    this.loadingService.show();
+
     this.firebaseService.getArtistById(id).subscribe((artists: User[]) => {
       if (artists.length > 0) {
         this.artist = artists[0];
@@ -57,14 +61,14 @@ export class ArtistProfileComponent implements OnInit {
       } else {
         console.error('No artist found with the given ID');
       }
-      this.isLoading = false;
-      this.loadingService.hide();
     });
   }
 
   loadPieces(authorId: string): void {
     this.firebaseService.getPiecesByAuthor(authorId).subscribe((pieces: Piece[]) => {
       this.pieces = pieces;
+      this.loadingService.hide();
+
     });
   }
 

@@ -1,52 +1,54 @@
-<div *ngIf="artist" class="artist-profile-container">
-  <div class="artist-name">
-    <p *ngIf="!isEditing">{{ artist.name }}</p>
-    <input *ngIf="isEditing" [(ngModel)]="artist.name" class="edit-name" placeholder="Editar nombre">
-  </div>
-  <div class="artist-image">
-    <img [src]="artist.image" alt="{{ artist.name }}">
-    <div *ngIf="isEditing">
-      <input type="file" (change)="onImageSelected($event)">
+<div *ngIf="!isLoading">
+  <div *ngIf="artist" class="artist-profile-container">
+    <div class="artist-name">
+      <p *ngIf="!isEditing">{{ artist.name }}</p>
+      <input *ngIf="isEditing" [(ngModel)]="artist.name" class="edit-name" placeholder="Editar nombre">
+    </div>
+    <div class="artist-image">
+      <img [src]="artist.image" alt="{{ artist.name }}">
+      <div *ngIf="isEditing">
+        <input type="file" (change)="onImageSelected($event)">
+      </div>
+    </div>
+    <div class="artist-description">
+      <p *ngIf="!isEditing">{{ artist.description }}</p>
+      <textarea *ngIf="isEditing" [(ngModel)]="artist.description" class="edit-description"></textarea>
+    </div>
+    <div *ngIf="currentUser && currentUser.role === 'artist'" class="edit-buttons">
+      <button *ngIf="!isEditing" (click)="toggleEdit()"> ✏️ </button>
+      <button *ngIf="isEditing" (click)="saveChanges()"> ✔️ </button>
+      <button *ngIf="isEditing" (click)="toggleEdit()"> ❌ </button>
     </div>
   </div>
-  <div class="artist-description">
-    <p *ngIf="!isEditing">{{ artist.description }}</p>
-    <textarea *ngIf="isEditing" [(ngModel)]="artist.description" class="edit-description"></textarea>
+  <div *ngIf="!artist">
+    <p>Loading...</p>
   </div>
-  <div *ngIf="currentUser && currentUser.role === 'artist'" class="edit-buttons">
-    <button *ngIf="!isEditing" (click)="toggleEdit()"> ✏️ </button>
-    <button *ngIf="isEditing" (click)="saveChanges()"> ✔️ </button>
-    <button *ngIf="isEditing" (click)="toggleEdit()"> ❌ </button>
-  </div>
-</div>
-<div *ngIf="!artist">
-  <p>Loading...</p>
-</div>
 
-<div class="background-container">
-  <div class="services-container">
-    <div class="servicios">
-      <h2>Servicios</h2>
-      <p>Más servicios que ofrece el artista incluyen opciones personalizadas, colaboraciones, talleres y asesorías
-        creativas.</p>
-      <ul class="servicios-list">
-        <li>Retratos</li>
-        <li>Abstracto</li>
-        <li>Casa</li>
-      </ul>
+  <div class="background-container">
+    <div class="services-container">
+      <div class="servicios">
+        <h2>Servicios</h2>
+        <p>Más servicios que ofrece el artista incluyen opciones personalizadas, colaboraciones, talleres y asesorías
+          creativas.</p>
+        <ul class="servicios-list">
+          <li>Retratos</li>
+          <li>Abstracto</li>
+          <li>Casa</li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="artworks-container">
-    <div class="search-container">
-      <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchQuery" (input)="onSearch()">
-    </div>
-    <div class="artworks">
-      <div *ngFor="let artwork of pieces" class="artwork-card" (click)="onCardClick(artwork.id)">
-        <img [src]="artwork.image" alt="{{ artwork.name }}">
-        <p *ngIf="currentUser && artist && currentUser.id === artist.id"
-          [ngClass]="{'verification-true': artwork.verification, 'verification-false': !artwork.verification}">
-          {{ artwork.verification ? 'Verificado' : 'Pendiente' }}
-        </p>
+    <div class="artworks-container">
+      <div class="search-container">
+        <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchQuery" (input)="onSearch()">
+      </div>
+      <div class="artworks">
+        <div *ngFor="let artwork of pieces" class="artwork-card" (click)="onCardClick(artwork.id)">
+          <img [src]="artwork.image" alt="{{ artwork.name }}">
+          <p *ngIf="currentUser && artist && currentUser.id === artist.id"
+            [ngClass]="{'verification-true': artwork.verification, 'verification-false': !artwork.verification}">
+            {{ artwork.verification ? 'Verificado' : 'Pendiente' }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
