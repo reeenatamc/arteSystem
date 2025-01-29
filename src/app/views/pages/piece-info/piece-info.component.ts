@@ -25,6 +25,8 @@ export class PieceInfoComponent implements OnInit {
   reviews$: Observable<Review[]> | null = null;
   currentUser: User | null = null;
   isLoading: boolean = false;
+  visibleReviews = 6;
+  isExpanded = false;
 
 
   constructor(
@@ -73,4 +75,22 @@ export class PieceInfoComponent implements OnInit {
     this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
     
   }
+
+  showMoreReviews() {
+    if (this.reviews$) {
+      this.reviews$.subscribe(reviews => {
+        const totalReviews = reviews.length;
+
+        if (this.visibleReviews < totalReviews) {
+          this.visibleReviews += 6; // Aumenta en 6 cada vez que se hace clic en "Ver más"
+        } else {
+          this.visibleReviews = 6; // Si ya se mostraron todas, se restablece a 6
+        }
+      });
+
+      // Alterna el estado de isExpanded
+      this.isExpanded = !this.isExpanded;
+    }
+  }
+  
 }

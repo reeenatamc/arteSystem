@@ -77,6 +77,8 @@ export class ViewreviewsComponent implements OnInit {
     this.selectedReview = review;
   }
 
+  
+
   // Métodos para la paginación
   get totalPages(): number {
     return Math.ceil(this.reviews.length / this.reviewsPerPage);

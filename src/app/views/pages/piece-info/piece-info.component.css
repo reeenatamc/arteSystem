@@ -48,18 +48,36 @@
 }
 
 .reviews {
-  margin-top: 20px;
-  width: 100%;
-}
-.reviews {
   padding: 1.5rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background-color: #f9f9f9;
   max-width: 600px;
-  margin: 1rem auto;
+  margin: 1rem 0; /* Esto elimina la alineación centrada */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
+
+.reviews-container {
+  display: flex;
+  justify-content: flex-start; /* Asegura que las reseñas estén a la izquierda */
+  align-items: flex-start;
+  gap: 20px; /* Espacio entre reseñas y otros elementos */
+}
+
+.reviews-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+}
+
+.reviews {
+  max-width: 600px;
+  width: 100%; /* Para que respete el ancho disponible */
+  margin: 1rem 0 1rem 0; /* Asegura que no tenga margen lateral que lo centre */
+}
+
 
 .reviews h3 {
   font-size: 1.8rem;
