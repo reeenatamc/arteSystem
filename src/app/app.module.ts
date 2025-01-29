@@ -26,6 +26,7 @@ import { ViewreviewsComponent } from './views/pages/viewreviews/viewreviews.comp
 import { UsersManagementComponent } from './views/pages/users-management/users-management.component';
 import { PaymentsManagementComponent } from './views/pages/payments-management/payments-management.component';
 import { PieceManagementComponent } from './views/pages/piece-management/piece-management.component';
+import { UserProfileComponent } from './views/pages/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PieceManagementComponent } from './views/pages/piece-management/piece-m
     UsersManagementComponent,
     PaymentsManagementComponent,
     PieceManagementComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

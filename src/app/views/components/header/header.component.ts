@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
             { label: 'Artistas', route: '/artists' },
             { label: 'Pedidos', route: '/orders' },
             { label: 'Reseñas', route: '/myreviews' },
+            { label: 'Perfil', route: '/userprofile' }
           ];
           break;
         case 'artist':
@@ -50,19 +51,19 @@ export class HeaderComponent implements OnInit {
             { label: 'Publicar', route: '/uploadPiece'},         
           ];
           break;
-          case 'admin':
-            this.options = [
-              { label: 'Usuarios', route: '/usersManagement' },
-              { label: 'Pagos', route: '/paymentsManagement' },
-              { label: 'Obras', route: '/pieceManagement' },  
-              { label: 'Reseñas', route: '/myreviews' },
-            ];
-            break;
-          case null:
-              this.options = [
-                { label: 'Iniciar sesion', route: '/login' },
-              ];
-              break;
+        case 'admin':
+          this.options = [
+            { label: 'Usuarios', route: '/usersManagement' },
+            { label: 'Pagos', route: '/paymentsManagement' },
+            { label: 'Obras', route: '/pieceManagement' },  
+            { label: 'Reseñas', route: '/myreviews' },
+          ];
+          break;
+        case null:
+          this.options = [
+            { label: 'Iniciar sesión', route: '/login' },
+          ];
+          break;
         default:
           this.options = [
             { label: 'Iniciar sesión', route: '/login' }

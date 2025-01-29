@@ -17,6 +17,7 @@ import { ViewreviewsComponent } from './views/pages/viewreviews/viewreviews.comp
 import { UsersManagementComponent } from './views/pages/users-management/users-management.component';
 import { PaymentsManagementComponent } from './views/pages/payments-management/payments-management.component';
 import { PieceManagementComponent } from './views/pages/piece-management/piece-management.component';
+import { UserProfileComponent } from './views/pages/user-profile/user-profile.component'; 
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,10 +26,11 @@ const routes: Routes = [
   { path: 'check', component: CheckComponent },
   { path: 'profileartist', component: ArtistProfileComponent },
   { path: 'register', component: RegisterPageComponent },
-  //rutas del artista
+  // Rutas del artista
   { path: 'uploadPiece', component: UploadPieceComponent },
   { path: 'pieceInfo', component: PieceInfoComponent },
-  // rutas del cliente
+  // Rutas del cliente
+  { path: 'userprofile', component: UserProfileComponent },
   { path: 'clientHome', component: CategoryComponent },
   { path: 'myreviews', component: ViewreviewsComponent },
   { path: 'reviews', component: ReviewsComponent },
@@ -37,12 +39,11 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'orders', component: MisPedidospageComponent },
   { path: 'myreviews', component: ViewreviewsComponent },
-  //rutas del admin
+  // Rutas del admin
   { path: 'usersManagement', component: UsersManagementComponent },
   { path: 'paymentsManagement', component: PaymentsManagementComponent },
   { path: 'pieceManagement', component: PieceManagementComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

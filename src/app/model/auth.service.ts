@@ -66,4 +66,61 @@ export class AuthService {
       this.router.navigate(['/home']);
     });
   }
+
+  // Método público para actualizar el usuario actual
+  updateCurrentUser(user: User | null): void {
+    this.currentUserSubject.next(user);
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+  }
+
+  // Método público para actualizar el usuario en Firestore
+  async updateUserInFirestore(user: User): Promise<void> {
+    try {
+      // Usamos 'set' con la opción 'merge' para asegurar que todos los campos se actualicen correctamente
+      await this.firestore.collection('users').doc(user.id).set(user, { merge: true });
+      this.updateCurrentUser(user);
+      console.log('Usuario actualizado en Firestore con éxito');
+    } catch (error) {
+      console.error('Error al actualizar el usuario en Firestore: ', error);
+      throw error;
+    }
+  }
+
+  // Método para verificar la contraseña actual
+  async verifyCurrentPassword(currentPassword: string): Promise<boolean> {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (user) {
+        const credential = await this.afAuth.signInWithEmailAndPassword(user.email!, currentPassword);
+        // Si la autenticación es exitosa, la contraseña es correcta
+        if (credential.user) {
+          return true;
+        }
+      }
+      return false;
+    } catch (error) {
+      console.error('Error verifying current password: ', error);
+      return false;
+    }
+  }
+
+  // Método para cambiar la contraseña
+  async changePassword(newPassword: string): Promise<void> {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (user) {
+        await user.updatePassword(newPassword);
+        console.log('Contraseña cambiada con éxito.');
+      } else {
+        throw new Error('No user is currently signed in.');
+      }
+    } catch (error) {
+      console.error('Error changing password: ', error);
+      throw error;
+    }
+  }
 }
