@@ -3,6 +3,8 @@ import { FirebaseService } from '../../../model/firebase.service';
 import { AuthService } from '../../../model/auth.service';
 import { Sale } from '../../../interfaces/sale';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-mis-pedidospage',
@@ -12,6 +14,8 @@ import { Router } from '@angular/router';
 export class MisPedidospageComponent implements OnInit {
   sales: Sale[] = [];
   currentUser: any;
+  isLoading: boolean = false;
+
 
   // Variables para la paginación
   currentPage: number = 1;
@@ -20,10 +24,14 @@ export class MisPedidospageComponent implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.currentUser = user;
@@ -34,8 +42,13 @@ export class MisPedidospageComponent implements OnInit {
   }
 
   loadSales(clientId: string): void {
+    this.loadingService.show(); 
+
     this.firebaseService.getSalesByClient(clientId).subscribe((sales: Sale[]) => {
       this.sales = sales;
+
+      this.loadingService.hide();
+
     });
   }
 

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FirebaseService } from '../../../model/firebase.service';
 import { AuthService } from '../../../model/auth.service';
 import { Review } from '../../../interfaces/review.model';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-viewreviews',
@@ -13,6 +15,7 @@ export class ViewreviewsComponent implements OnInit {
   currentUser: any;
   reviews: Review[] = [];
   selectedReview: Review | null = null;
+  isLoading: boolean = false;
 
   // Variables para la paginación
   currentPage: number = 1;
@@ -21,10 +24,14 @@ export class ViewreviewsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private firebaseService: FirebaseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
@@ -33,9 +40,13 @@ export class ViewreviewsComponent implements OnInit {
   }
 
   loadReviews(): void {
+    this.loadingService.show(); 
+
     this.firebaseService.getReviews().subscribe((reviews: Review[]) => {
       this.reviews = reviews;
       console.log(this.reviews);
+      this.loadingService.hide();
+
     });
   }
 

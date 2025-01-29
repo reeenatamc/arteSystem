@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../model/firebase.service';
 import { User } from '../../../interfaces/user.model';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../services/loading.service';
+
 
 @Component({
   selector: 'app-artists',
@@ -10,16 +12,24 @@ import { Router } from '@angular/router';
 })
 export class ArtistsComponent implements OnInit {
   artists: User[] = [];
+  isLoading: boolean = false;
+
 
   // Variables para la paginación
   currentPage: number = 1;
   artistsPerPage: number = 4;
 
-  constructor(private firebaseService: FirebaseService, private router: Router) {}
+  constructor(private firebaseService: FirebaseService, private router: Router, private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+    this.loadingService.show(); 
+
     this.firebaseService.getArtists().subscribe((artists: User[]) => {
       this.artists = artists;
+      this.loadingService.hide();
     });
   }
 

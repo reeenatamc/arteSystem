@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { CartService } from '../../../services/cart.service';
 import { Router} from '@angular/router';
 import { Piece } from '../../../interfaces/piece.model';
+import { LoadingService } from '../../../services/loading.service';
+
 
 
 
@@ -20,11 +22,19 @@ export class StoreComponent implements OnInit {
   type: string | null = null;
   subcategory: string = '';
   searchQuery: string = '';
+  isLoading: boolean = false;
 
-  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute, private cartService: CartService, private router: Router,
+
+  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute, private cartService: CartService, private router: Router,private loadingService: LoadingService
     ) {}
 
   ngOnInit() {
+    this.loadingService.loading$.subscribe((isLoading) => {
+      this.isLoading = isLoading;
+    });
+
+    this.loadingService.show(); 
+
     this.route.queryParamMap.subscribe(params => {
       this.type = params.get('type');
       if (this.type) {
@@ -32,7 +42,12 @@ export class StoreComponent implements OnInit {
       } else {
         this.pieces$ = this.firebaseService.getPiecesVerified();
       }
+      this.pieces$?.subscribe(() => {
+        this.loadingService.hide(); // Oculta el loader cuando los datos están listos
+      });
+  
       this.applyFilters();
+
     });
   }
 
@@ -42,6 +57,7 @@ export class StoreComponent implements OnInit {
         (this.subcategory ? piece.subcategory === this.subcategory : true) &&
         (this.searchQuery ? piece.name.toLowerCase().includes(this.searchQuery.toLowerCase()) : true)
       ))
+
     );
   }
 
