@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/user.model';
+import { FirebaseError } from '@angular/fire/app'; // Asegúrate de que esta importación es correcta según tu configuración de Firebase
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,8 @@ export class AuthService {
       }
     } catch (error) {
       console.error('Error logging in: ', error);
+      // Lanzamos el error para que el componente pueda capturarlo y manejarlo
+      throw error;
     }
   }
 

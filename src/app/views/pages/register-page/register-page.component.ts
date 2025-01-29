@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../../../interfaces/user.model';
 import { FirebaseService } from '../../../model/firebase.service';
 import { SupabaseService } from '../../../model/supabase.service';
+import { LoadingService } from '../../../services/loading.service'; // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ export class RegisterPageComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private userService: FirebaseService,
     private supabaseService: SupabaseService,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService // Inyectamos el servicio de carga
   ) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
@@ -54,6 +56,9 @@ export class RegisterPageComponent implements OnInit {
     const { username, email, password, description, skills, phone } = this.registerForm.value;
 
     try {
+      // Mostramos el indicador de carga
+      this.loadingService.show();
+      
       let imageUrl = '';
       if (this.selectedFile) {
         imageUrl = await this.supabaseService.uploadImage(this.selectedFile);
@@ -70,13 +75,16 @@ export class RegisterPageComponent implements OnInit {
         image: imageUrl,
         role: this.role,
         description,
-        skills: skills.split(',').map((skill: string) => ({ name: skill.trim() })) // Assuming skills are comma-separated
+        skills: skills.split(',').map((skill: string) => ({ name: skill.trim() }))
       };
       await this.userService.saveUser(newUser);
       alert('Usuario registrado correctamente');
-    this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Error registering user:', error);
+    } finally {
+      // Ocultamos el indicador de carga independientemente de si hubo un error o no
+      this.loadingService.hide();
     }
   }
 }
