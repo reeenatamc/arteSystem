@@ -6,6 +6,14 @@
   gap: 20px; /* Espaciado entre elementos */
 }
 
+.warning {
+  color: #d9534f; /* Rojo */
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+
 .image-upload {
   flex: 1;
   margin-right: 20px;

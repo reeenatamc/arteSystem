@@ -32,10 +32,34 @@ export class UploadPieceComponent {
   currentUser: User | null = null;
   subcategories: string[] = [];
   isLoading: boolean = false;
+  warningMessage: string = ''; // Nueva propiedad para el mensaje de advertencia
 
+  constructor(
+    private firestore: AngularFirestore, 
+    private supabaseService: SupabaseService, 
+    private authService: AuthService, 
+    private router: Router, 
+    private loadingService: LoadingService
+  ) {}
 
-  constructor(private firestore: AngularFirestore, private supabaseService: SupabaseService, 
-    private authService: AuthService,  private router: Router, private loadingService: LoadingService) {}
+  onTypeChange(): void {
+    switch (this.piece.type) {
+      case 'pintura':
+        this.subcategories = ['acrilico', 'escultura', 'acuarela', 'pastel'];
+        this.warningMessage = ''; // No mostrar advertencia para pintura
+        break;
+      case 'escultura':
+      case 'ceramica': // Advertencia para escultura y cerámica
+        this.subcategories = ['arquitectonica', 'urbana', 'monumental'];
+        this.warningMessage = '⚠️Asegúrese que en la imagen se vea correctamente el volumen de la obra.';
+        break;
+      default:
+        this.subcategories = [];
+        this.warningMessage = ''; // Limpia el mensaje para otros tipos
+        break;
+    }
+  }
+
 
   ngOnInit(): void {
     // Mostrar el spinner al cargar la página
@@ -62,19 +86,6 @@ export class UploadPieceComponent {
     this.selectedFile = event.target.files[0];
   }
 
-  onTypeChange(): void {
-    switch (this.piece.type) {
-      case 'pintura':
-        this.subcategories = ['acrilico', 'escultura', 'acuarela','pastel'];
-        break;
-      case 'escultura':
-        this.subcategories = ['arquitectonica', 'urbana', 'monumental'];
-        break;
-      default:
-        this.subcategories = [];
-        break;
-    }
-  }
 
   submitForReview() {
     this.router.navigate(['/check'], { queryParams: { option: 'publicacion' } });
