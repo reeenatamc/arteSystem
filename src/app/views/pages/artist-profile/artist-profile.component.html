@@ -1,14 +1,10 @@
 <div *ngIf="!isLoading">
   <div *ngIf="artist" class="artist-profile-container">
     <div class="artist-name">
-      <p *ngIf="!isEditing">{{ artist.name }}</p>
-      <input *ngIf="isEditing" [(ngModel)]="artist.name" class="edit-name" placeholder="Editar nombre">
+      <p>{{ artist.name }}</p>
     </div>
     <div class="artist-image">
       <img [src]="artist.image" alt="{{ artist.name }}">
-      <div *ngIf="isEditing">
-        <input type="file" (change)="onImageSelected($event)">
-      </div>
     </div>
     <div class="artist-description">
       <p *ngIf="!isEditing">{{ artist.description }}</p>
