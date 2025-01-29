@@ -6,11 +6,11 @@ import { NgModel } from '@angular/forms'; // Importación necesaria para NgModel
 import { getAuth, updateEmail, updateProfile, sendEmailVerification } from 'firebase/auth';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-artist-edit-profile',
+  templateUrl: './artist-edit-profile.component.html',
+  styleUrl: './artist-edit-profile.component.css'
 })
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class ArtistEditProfileComponent implements OnInit, OnDestroy {
   user: User | null = null;
   isEditing: boolean = false;
   selectedImage: File | null = null;
