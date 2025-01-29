@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
           ];
           break;
         case 'artist':
-          
           this.options = [
             { label: 'Home', route: '/home' },
             { label: 'Arte', route: '/profileartist' },

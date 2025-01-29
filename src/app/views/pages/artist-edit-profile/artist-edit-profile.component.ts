@@ -2,15 +2,15 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { AuthService } from '../../../model/auth.service';
 import { SupabaseService } from '../../../model/supabase.service';
 import { User } from '../../../interfaces/user.model';
-import { Skill } from '../../../interfaces/skill.model';
 import { NgModel } from '@angular/forms'; // Importación necesaria para NgModel
+import { getAuth, updateEmail, updateProfile, sendEmailVerification } from 'firebase/auth';
 
 @Component({
-  selector: 'app-artist-edit-profile',
-  templateUrl: './artist-edit-profile.component.html',
-  styleUrl: './artist-edit-profile.component.css'
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css']
 })
-export class ArtistEditProfileComponent implements OnInit, OnDestroy {
+export class UserProfileComponent implements OnInit, OnDestroy {
   user: User | null = null;
   isEditing: boolean = false;
   selectedImage: File | null = null;
@@ -69,6 +69,7 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  
   async saveChanges(): Promise<void> {
     if (this.user) {
       // Validamos el email
@@ -78,22 +79,42 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
       }
   
       try {
-        if (this.selectedImage) {
-          const imageUrl = await this.supabaseService.uploadImage(this.selectedImage);
-          this.user.image = imageUrl;
-          // Actualizamos la vista previa con la URL final si es necesario
-          this.previewImage = imageUrl;
+        const auth = getAuth();
+        const currentUser = auth.currentUser;
+  
+        if (currentUser) {
+          // Actualizar el correo electrónico en Firebase Authentication si ha cambiado
+          if (this.user.email !== currentUser.email) {
+            await updateEmail(currentUser, this.user.email);
+            // Envía el correo de verificación
+            await sendEmailVerification(currentUser);
+            alert('Se ha enviado un correo de verificación al nuevo correo electrónico. Por favor, verifícalo antes de continuar.');
+            // No actualices Firestore hasta que el correo sea verificado
+            return;
+          }
+  
+          // Aquí iría el código para actualizar otras partes del perfil si es necesario
+          // ...
+  
+          // Actualizar el usuario en Firestore usando el método del servicio
+          await this.authService.updateUserInFirestore(this.user);
+  
+          this.isEditing = false;
+          alert('Perfil actualizado con éxito');
+        } else {
+          throw new Error('No hay usuario autenticado');
         }
-        // Actualizar el usuario en Firestore usando el método del servicio
-        await this.authService.updateUserInFirestore(this.user);
-        this.isEditing = false;
-        alert('Perfil actualizado con éxito');
       } catch (error) {
         console.error('Error al guardar los cambios: ', error);
+        let errorMessage = 'Hubo un error al intentar actualizar el perfil. Por favor, inténtalo de nuevo.';
+        if (error instanceof Error) {
+          errorMessage += ' Detalles: ' + error.message;
+        }
+        alert(errorMessage);
       }
     }
   }
-
+  
   cancelChanges(): void {
     this.isEditing = false;
     this.resetPreviewImage();
@@ -146,9 +167,3 @@ export class ArtistEditProfileComponent implements OnInit, OnDestroy {
     }
   }
 }
-
-
-
-
-
-
