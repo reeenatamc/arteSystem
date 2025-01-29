@@ -4,6 +4,10 @@ import { FirebaseService } from '../../../model/firebase.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { CartService } from '../../../services/cart.service';
+import { Router} from '@angular/router';
+import { Piece } from '../../../interfaces/piece.model';
+
+
 
 @Component({
   selector: 'app-store',
@@ -17,7 +21,8 @@ export class StoreComponent implements OnInit {
   subcategory: string = '';
   searchQuery: string = '';
 
-  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute, private cartService: CartService) {}
+  constructor(private firebaseService: FirebaseService, private route: ActivatedRoute, private cartService: CartService, private router: Router,
+    ) {}
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
@@ -43,5 +48,9 @@ export class StoreComponent implements OnInit {
   addToCart(piece: any) {
     this.cartService.addToCart(piece);
     alert('Obra agregada al carrito!');
+  }
+
+  onCardClick(pieceId: string): void {
+    this.router.navigate(['/pieceInfo'], { queryParams: { id: pieceId } });
   }
 }

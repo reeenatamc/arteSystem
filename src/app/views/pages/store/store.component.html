@@ -17,7 +17,7 @@
   </div>
   <div *ngIf="pieces$ | async as pieces; else loading">
     <div class="cards-container">
-      <div *ngFor="let piece of filteredPieces$ | async" class="piece-card">
+      <div *ngFor="let piece of filteredPieces$ | async" class="piece-card" (click)="onCardClick(piece.id)">
         <img [src]="piece.image" alt="{{ piece.name }}">
         <div class="card-details">
           <h2>{{ piece.name }} <span class="piece-type">{{ piece.subcategory }}</span></h2>

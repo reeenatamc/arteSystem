@@ -39,10 +39,96 @@
   margin-top: -7%;
 }
 
+.material-icons {
+  color: #ccc;
+}
+
+.material-icons.filled {
+  color: #ffca28;
+}
+
 .reviews {
   margin-top: 20px;
   width: 100%;
 }
+.reviews {
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 1rem auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reviews h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.review {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.review:last-child {
+  border-bottom: none;
+}
+
+.review-user {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.review-description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.review-score {
+  font-size: 1rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.no-reviews {
+  font-size: 1rem;
+  color: #888;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.floating-cart-btn {
+  position: fixed;
+  top: 120px;
+  right: 40px;
+  background: linear-gradient(to right, #ECC30B, #EF8A17);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  /* Asegúrate de que el botón esté en la parte superior */
+}
+
 .price {
   background-color: #04880480;
   color: white;

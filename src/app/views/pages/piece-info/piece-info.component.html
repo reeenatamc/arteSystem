@@ -4,7 +4,7 @@
       <h2>{{ piece.author }}</h2>
     </div>
     <div class="piece-details">
-      <div class="piece-image">
+      <div class="piece-image" >
         <img [src]="piece.image" alt="{{ piece.name }}">
       </div>
       <div class="piece-info">
@@ -15,12 +15,18 @@
             <span class="piece-type">{{ piece.subcategory }}</span>
       </div>
     </div>
+    <button class="floating-cart-btn" [routerLink]="['/cart']" *ngIf="currentUser?.role === 'client' || currentUser?.role === 'client'" (click)="onCardClick(piece.id, piece)">
+      🛒
+    </button>
     <div class="reviews">
       <h3>Reseñas</h3>
       <ng-container *ngIf="reviews$ | async as reviews">
         <div *ngIf="reviews.length > 0; else noReviews">
           <div *ngFor="let review of reviews" class="review">
             <p><strong>{{ review.user.name }}</strong>: {{ review.description }}</p>
+            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons" [ngClass]="{'filled': star <= review.score}">
+              star
+            </span>
             <p>Puntuación: {{ review.score }} / 5</p>
           </div>
         </div>
