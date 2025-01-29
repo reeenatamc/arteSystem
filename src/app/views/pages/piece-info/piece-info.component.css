@@ -134,6 +134,7 @@
   cursor: pointer;
   padding: 0;
   text-decoration: underline;
+  margin-top: 10px;
 }
 
 .ver-mas-btn:hover {
