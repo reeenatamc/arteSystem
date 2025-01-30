@@ -45,13 +45,28 @@ export class UploadPieceComponent {
   onTypeChange(): void {
     switch (this.piece.type) {
       case 'pintura':
-        this.subcategories = ['acrilico', 'escultura', 'acuarela', 'pastel'];
+        this.subcategories = ['pintura al óleo', 'acuarela', 'pintura digital', 'arte abstracto'];
         this.warningMessage = ''; // No mostrar advertencia para pintura
         break;
       case 'escultura':
-      case 'ceramica': // Advertencia para escultura y cerámica
-        this.subcategories = ['arquitectonica', 'urbana', 'monumental'];
+        this.subcategories = ['escultura en metal', 'escultura en madera', 'escultura contemporánea'];
         this.warningMessage = '⚠️Asegúrese que en la imagen se vea correctamente el volumen de la obra.';
+        break;
+      case 'arte_callejero':
+        this.subcategories = ['graffiti', 'muralismo', 'street art digital'];
+        this.warningMessage = ''; // No mostrar advertencia para arte callejero
+        break;
+      case 'ceramica':
+        this.subcategories = ['cerámica artesanal', 'cerámica escultórica'];
+        this.warningMessage = '⚠️Asegúrese que en la imagen se vea correctamente el volumen de la obra.';
+        break;
+      case 'otro':
+        this.subcategories = ['fotografía artística', 'arte digital'];
+        this.warningMessage = ''; // No mostrar advertencia para otro tipo de arte
+        break;
+      case 'dibujo':
+        this.subcategories = ['dibujo a lápiz', 'ilustración', 'dibujo digital'];
+        this.warningMessage = ''; // No mostrar advertencia para dibujo
         break;
       default:
         this.subcategories = [];
@@ -59,6 +74,7 @@ export class UploadPieceComponent {
         break;
     }
   }
+  
 
 
   ngOnInit(): void {
