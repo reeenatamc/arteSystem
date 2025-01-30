@@ -30,6 +30,12 @@
             <option value="dibujo">Dibujo</option>
           </select>
         </div>
+        
+        <!-- Mostrar mensaje de advertencia dinámicamente -->
+        <div *ngIf="warningMessage" class="warning">
+          <p>{{ warningMessage }}</p>
+        </div>
+        
         <div>
           <label for="subcategory">Subcategory:</label>
           <select id="subcategory" required [(ngModel)]="piece.subcategory" name="subcategory">

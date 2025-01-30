@@ -9,7 +9,7 @@
         <div class="input-group">
           <i class="fa fa-user"></i>
           <div class="separator"></div>
-          <input id="email" formControlName="email" type="email" placeholder="Username">
+          <input id="email" formControlName="email" type="email" placeholder="Email">
         </div>
         <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
           <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>

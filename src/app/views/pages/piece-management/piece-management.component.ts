@@ -70,10 +70,13 @@ export class PieceManagementComponent implements OnInit {
   }
 
   deletePiece(pieceId: string): void {
-    this.firebaseService.deletePiece(pieceId).then(() => {
-      this.loadPieces(); // Recargar las piezas después de eliminarlas
-    });
-  }
+    const confirmed = window.confirm("¿Estás seguro de que deseas eliminar esta obra?");
+if (confirmed) {
+  this.firebaseService.deletePiece(pieceId).then(() => {
+    this.loadPieces(); // Recargar las piezas después de eliminarlas
+  });
+}
+}
   
 
 }

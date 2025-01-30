@@ -1,40 +1,70 @@
 <div *ngIf="piece$ | async as pieces">
   <div *ngFor="let piece of pieces" class="piece-info-container">
     <div class="author">
-      <h2>{{ piece.author }}</h2>
+      <!-- <h2>{{ piece.author }}</h2> -->
     </div>
     <div class="piece-details">
-      <div class="piece-image" >
-        <img [src]="piece.image" alt="{{ piece.name }}">
+      <div class="piece-image" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
+        <img [src]="piece.image" alt="{{ piece.name }}" class="image">
+        <div class="zoom-lens"></div> <!-- Contenedor para la lupa -->
       </div>
-      <div class="piece-info">
-        <h1>{{ piece.name }}</h1>
-        <p>{{ piece.description }}</p>
-        <p><strong>Dimensiones:</strong> {{ piece.width }} x {{ piece.height }}</p>
-            <p class="price">{{ piece.price | currency }}</p>
-            <span class="piece-type">{{ piece.subcategory }}</span>
-      </div>
-    </div>
-    <button class="floating-cart-btn" [routerLink]="['/cart']" *ngIf="currentUser?.role === 'client' || currentUser?.role === 'client'" (click)="onCardClick(piece.id, piece)">
-      🛒
-    </button>
-    <div class="reviews">
-      <h3>Reseñas</h3>
-      <ng-container *ngIf="reviews$ | async as reviews">
-        <div *ngIf="reviews.length > 0; else noReviews">
-          <div *ngFor="let review of reviews" class="review">
-            <p><strong>{{ review.user.name }}</strong>: {{ review.description }}</p>
-            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons" [ngClass]="{'filled': star <= review.score}">
-              star
-            </span>
-            <p>Puntuación: {{ review.score }} / 5</p>
+
+      <div class="piece-info-container-right">
+        <div class="piece-info">
+          <h1>{{ piece.name }}</h1>
+          <div class="piece-description">
+            <p>{{ piece.description }}</p>
+          </div>
+          <p><strong>Dimensiones:</strong> {{ piece.width }} x {{ piece.height }}</p>
+          <p class="price">{{ piece.price | currency }}</p>
+          <span class="piece-type">{{ piece.subcategory }}</span>
+        </div>
+        <div class="colum-container">
+          <div class="reviews-container">
+            <div class="reviews">
+              <h3>Reseñas</h3>
+              <ng-container *ngIf="reviews$ | async as reviews">
+                <div *ngIf="reviews.length > 0; else noReviews">
+                  <div *ngFor="let review of reviews.slice(0, visibleReviews)" class="review">
+                    <p><strong>{{ review.user.name }}</strong>: {{ review.description }}</p>
+                    <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons"
+                      [ngClass]="{'filled': star <= review.score}">
+                      star
+                    </span>
+                    <p>Puntuación: {{ review.score }} / 5</p>
+                  </div>
+                  <button class="ver-mas-btn" (click)="showMoreReviews()">
+                    {{ isExpanded ? 'Mostrar menos' : 'Ver más' }}
+                  </button>
+                </div>
+                <ng-template #noReviews>
+                  <p>No hay reseñas para esta obra.</p>
+                </ng-template>
+              </ng-container>
+            </div>
+          </div>
+          <div class="interests">
+            <h3>Quizá te interese</h3>
+            <div class="interests-container">
+              <div class="interest-item" *ngFor="let piece of suggestedPieces | slice:0:2">
+                <div class="interest-image">
+                  <img [src]="piece.image" [alt]="piece.name" class="img-interest">
+                </div>
+                <div class="interest-info">
+                  <h4>{{ piece.name }}</h4>
+                  <p>{{ piece.price | currency }}</p>
+                  <button (click)="onCardClick(piece.id, piece)">🛒</button>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
-        <ng-template #noReviews>
-          <p>No hay reseñas para esta obra.</p>
-        </ng-template>
-      </ng-container>
+      </div>
     </div>
-    
+    <button class="floating-cart-btn" [routerLink]="['/cart']"
+      *ngIf="currentUser?.role === 'client' || currentUser?.role === 'client'" (click)="onCardClick(piece.id, piece)">
+      🛒
+    </button>
   </div>
 </div>

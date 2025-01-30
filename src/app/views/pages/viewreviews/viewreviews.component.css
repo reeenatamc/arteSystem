@@ -157,6 +157,44 @@
 .star-rating input[type="radio"] {
   display: none;
 }
+.search-box {
+  gap: 8px;
+  max-width: 300px;
+  margin: 16px 0; /* Ajuste de margen */
+  display:flex;
+  align-items: center;
+  margin-left: 25%;
+}
+
+
+.search-box label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: #EF8A17;
+  box-shadow: 0 0 5px #EF8A17;
+  background-color: #fff;
+}
+
+.search-box input::placeholder {
+  color: #aaa;
+}
+
 
 .star-rating label {
   font-size: 2em;
@@ -172,6 +210,38 @@
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   color: #ffca28;
+}
+
+.edit-btn, .delete-btn{
+  background: none; /* Quita el fondo */
+  border: none; /* Quita el borde */
+  padding: 0; /* Quita el espacio interno */
+  cursor: pointer; /* Cambia el cursor a mano */
+  display: inline-flex; /* Ajusta el tamaño al contenido */
+  align-items: center; /* Centra la imagen */
+  justify-content: center; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-btn img, .delete-btn img {
+  width: 20px; /* Reduce el tamaño de la imagen */
+  height: 20px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+}
+
+.edit-btn:hover{
+  filter: brightness(0) saturate(100%) invert(32%) sepia(95%) saturate(2654%) hue-rotate(220deg) brightness(90%) contrast(105%);}
+
+  .delete-btn:hover img {
+    filter: brightness(0) saturate(100%) invert(17%) sepia(94%) saturate(7490%) hue-rotate(2deg) brightness(102%) contrast(106%);
+  }
+.button-container {
+  display: flex;
+  gap: 15px; /* Agrega espacio entre botones */
+  margin-top: 10px;
 }
 
 .pagination {

@@ -47,7 +47,7 @@
         </div>
 
         <div class="profile-actions">
-          <button *ngIf="!isEditing" (click)="toggleEdit()"> ✏️ </button>
+          <button *ngIf="!isEditing" (click)="toggleEdit()" class = "edit-button"> ✏️ </button>
           <button *ngIf="isEditing" (click)="saveChanges()" class="confirm-button">✔️</button>
           <button *ngIf="isEditing" (click)="cancelChanges()" class="cancel-button">❌</button>
         </div>

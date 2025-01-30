@@ -21,7 +21,10 @@
             <img [src]="piece.image" alt="{{ piece.name }}">
           </div>
         </div>
-        <button class="dar-resenia-button" *ngIf="sale.status" (click)="navigateToReviews(sale.id)">Dar reseñas</button>
+        <button class="dar-resenia-button" *ngIf="sale.status" (click)="navigateToReviews(sale.id)">
+          <img src="\assets\media\review-icon.svg" alt="Editar" class="icon">
+
+          ¡Dejar reseña!</button>
       </div>
       <div class="payment-proof">
         <a [href]="sale.imagePayment" target="_blank">Ver Comprobante de Pago</a>
