@@ -21,7 +21,8 @@
         <div class="piece-info">
           <h3>{{ piece.name }}</h3>
           <p>Precio: {{ piece.price | currency }}</p>
-          <p>Stock: {{ piece.stock }}</p>
+          <!--
+          <p>Stock: {{ piece.stock }}</p> -->
           <p>Dimensiones: {{ piece.height }} x {{ piece.width }}</p>
           <p [ngClass]="piece.verification ? 'verified' : 'not-verified'">
             {{ piece.verification ? 'Verificado' : 'No Verificado' }}
