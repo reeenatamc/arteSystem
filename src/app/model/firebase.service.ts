@@ -43,6 +43,16 @@ export class FirebaseService {
     return this.firestore.collection<User>('users', ref => ref.where('role', '==', 'artist')).valueChanges();
   }
 
+  async updateUserEmail(userId: string, newEmail: string): Promise<void> {
+    try {
+      await this.firestore.collection('users').doc(userId).update({ email: newEmail });
+      console.log(`Email updated for user with id: ${userId}`);
+    } catch (error) {
+      console.error('Error updating email:', error);
+      throw error; // Re-throw the error to be caught in the component
+    }
+  }
+  
   getArtistById(id: string): Observable<any> {
     return this.firestore.collection<any>('users',ref => ref.where('id', '==', id)).valueChanges();
   }
