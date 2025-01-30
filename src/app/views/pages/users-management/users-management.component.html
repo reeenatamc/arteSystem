@@ -10,14 +10,19 @@
             <p *ngFor="let skill of user.skills">{{ skill.name }}</p>
           </div>
           <div class="user-actions">
-            <button class="editbutton" (click)="editUser(user)">Editar</button>
+            <!-- Botón de Editar -->
+            <button class="editbutton" (click)="editUser(user)">
+              <img src="/assets/media/edit-icon.svg" alt="Editar" class="icon">
+            </button>
+            <!-- Botón de Eliminar -->
             <button class="deletebutton" (click)="deleteUser(user.id)">
-                <span class="material-icons">delete</span>
-              </button>
+              <img src="/assets/media/delete-icon.svg" alt="Eliminar" class="icon">
+            </button>
           </div>
         </div>
       </li>
     </ul>
+    <!-- El resto del código se mantiene igual -->
     <div *ngIf="selectedUser" class="edit-form">
       <h3>Editar Usuario</h3>
       <form (ngSubmit)="saveUser()">
