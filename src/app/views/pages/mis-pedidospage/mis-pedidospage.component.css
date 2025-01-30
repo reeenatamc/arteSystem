@@ -103,39 +103,50 @@
   opacity: 0.8;
 }
 
-.dar-resenia-button{
-  all: unset;
-  padding: 5px;
-  background-color: #ECC30B;
+.dar-resenia-button {
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  width: 20%;
-  text-align: center;
-  border-radius: 6px;
-  margin-top: 10px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  font-size: 14px;
-}
-.dar-resenia-button:hover{
-  transform: scale(1.1); 
-  color:white;
-  opacity: 0.8; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
 }
 
-.pedidos-text{
+.dar-resenia-button:hover {
+  transform: scale(1.1);
+  /* color: white; */
+  opacity: 0.8;
+  font-weight: bold;
+
+}
+
+.dar-resenia-button img {
+  padding-right: 5px;
+  width: 40px;
+  /* Reduce el tamaño de la imagen */
+  height: 40px;
+}
+
+.pedidos-text {
   text-align: center;
   font-weight: lighter;
   margin-top: 20px;
   color: #434343;
 }
+
 .no-sales-container {
   text-align: center;
   margin-top: 20px;
 }
 
 .no-sales-image {
-  width: 40%; /* Ajusta el tamaño según necesites */
+  width: 40%;
+  /* Ajusta el tamaño según necesites */
   margin-bottom: 10px;
 }
+
 /* Media query para dispositivos móviles */
 @media (max-width: 600px) {
   .sale-card {

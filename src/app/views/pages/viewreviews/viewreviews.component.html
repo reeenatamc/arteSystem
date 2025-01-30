@@ -24,46 +24,46 @@
           <h3>{{ review.piece.name }}</h3>
           <p><strong>Usuario:</strong> {{ review.user.name }}</p>
           <p class="stars">
-            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons" [ngClass]="{'filled': star <= review.score}">
+            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons"
+              [ngClass]="{'filled': star <= review.score}">
               star
             </span>
           </p>
-      
+
           <!-- Si el usuario está editando la reseña -->
           <div *ngIf="selectedReview && selectedReview.id === review.id">
             <textarea [(ngModel)]="selectedReview.description"></textarea>
-            
+
             <button class="save-btn" (click)="saveReview()">Guardar</button>
             <button class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
           </div>
-      
+
           <!-- Si NO está editando la reseña -->
           <div *ngIf="!selectedReview || selectedReview.id !== review.id">
-            <p><strong>Descripción:</strong> {{ review.description | slice:0:100 }}<span *ngIf="review.description.length > 100">...</span></p>
+            <p><strong>Descripción:</strong> {{ review.description | slice:0:100 }}<span
+                *ngIf="review.description.length > 100">...</span></p>
             <button *ngIf="review.description.length > 100" (click)="toggleFullDescription(review)">Ver más</button>
             <div *ngIf="selectedReview && selectedReview.id === review.id" class="full-description">
               <p>{{ review.description }}</p>
               <button (click)="toggleFullDescription(null)">Ver menos</button>
             </div>
-            
-            <!-- Botones de Editar y Eliminar -->
-            <button 
-              *ngIf="currentUser && (currentUser.id === review.user.id)" 
-              class="edit-btn" 
-              (click)="editReview(review)">
-              Editar
-            </button>
-      
-            <button 
-              *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.id === review.user.id)" 
-              class="delete-btn" 
-              (click)="deleteReview(review.id)">
-              Eliminar
-            </button>
+            <div class="button-container">
+              <!-- Botones de Editar y Eliminar -->
+              <button *ngIf="currentUser && (currentUser.id === review.user.id)" class="edit-btn"
+                (click)="editReview(review)">
+                <img src="\assets\media\edit-icon.svg" alt="Editar" class="icon">
+              </button>
+
+
+              <button *ngIf="currentUser && (currentUser.role === 'admin' || currentUser.id === review.user.id)"
+                class="delete-btn" (click)="deleteReview(review.id)">
+                <img src="\assets\media\delete-icon.svg" alt="Eliminar" class="icon">
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      
+
     </li>
   </ul>
 
