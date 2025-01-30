@@ -16,25 +16,19 @@
 
 /* Diseño de los botones */
 .filter-buttons button {
-  padding: 10px 20px;
-  background: #16a34a; /* Verde sólido */
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  all: unset; /* Elimina todos los estilos predeterminados de los botones */
+  color: black; /* Verde */
   font-size: 1em;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  min-width: 120px;
-  text-align: center;
+  font-weight: lighter;
+  cursor: pointer;
+  text-decoration: none; /* Evita subrayado */
+  transition: color 0.3s ease;
+  margin-top: 15px;
 }
 
-/* Efecto hover */
 .filter-buttons button:hover {
-  background: #15803d; /* Verde más oscuro */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
+  color: #15803d; /* Un verde más oscuro al pasar el mouse */
+  text-decoration: underline; /* Opción para destacar el hover */
 }
 
 
@@ -51,26 +45,49 @@
 }
 
 
-.btn-delete {
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 14px;
-  margin-left: 10px;
+
+
+.delete-btn, .verify-btn{
+  background: none; /* Quita el fondo */
+  border: none; /* Quita el borde */
+  padding: 0; /* Quita el espacio interno */
+  cursor: pointer; /* Cambia el cursor a mano */
+  display: inline-flex; /* Ajusta el tamaño al contenido */
+  align-items: center; /* Centra la imagen */
+  justify-content: center; 
+  transition: transform 0.2s ease-in-out;
+  align-self: flex-end; /* Asegura que el botón esté en la parte inferior */
+  margin-top: auto;
 }
 
-.btn-delete:hover {
-  background-color: #c0392b;
+ .delete-btn img, .verify-btn img {
+  width: 25px; /* Reduce el tamaño de la imagen */
+  height: 25px;
+}
+.delete-btn:hover, .verify-btn:hover {
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+}
+
+.delete-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(17%) sepia(94%) saturate(7490%) hue-rotate(2deg) brightness(102%) contrast(106%);
+}
+.verify-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(67%) saturate(679%) hue-rotate(80deg) brightness(102%) contrast(101%);
+}
+
+
+.btn-obras {
+  display: flex;
+  gap: 15px; /* Espacio entre los botones */
+  justify-content: center; /* Centrar botones */
+  margin-top: 10px; /* Empuja el contenedor hacia abajo */
 }
 
 
 .pieces-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* Espacio entre las tarjetas */
   justify-content: center;
   margin: 10px;
 }
@@ -79,6 +96,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -95,9 +113,14 @@
 }
 
 .piece-info {
-  text-align: left;
-  width: 100%;
+  flex-grow: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Empuja .btn-obras hacia abajo */
+  text-align: left; /* Alinea el texto a la izquierda */
+  width: 100%; /* Asegura que el contenido use todo el ancho */
 }
+
 
 .verified {
   color: green;

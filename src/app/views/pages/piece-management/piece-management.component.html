@@ -1,5 +1,3 @@
-
-
 <div *ngIf="!isLoading">
   <div class="pieces-container">
     <h2>Gestión de Obras de arte</h2>
@@ -28,9 +26,15 @@
           <p [ngClass]="piece.verification ? 'verified' : 'not-verified'">
             {{ piece.verification ? 'Verificado' : 'No Verificado' }}
           </p>
-          <button *ngIf="!piece.verification" class="btn-verify"
-            (click)="updatePieceVerification(piece.id, true)">Verificar</button>
-          <button class="btn-delete" (click)="deletePiece(piece.id)">Eliminar</button>
+          <div class="btn-obras">
+            <button *ngIf="!piece.verification" class="verify-btn"
+              (click)="updatePieceVerification(piece.id, true)">
+              <img src="\assets\media\verificacion-icon.svg" alt="Eliminar" class="icon">
+            </button>
+            <button class="delete-btn" (click)="deletePiece(piece.id)">
+              <img src="\assets\media\delete-icon.svg" alt="Eliminar" class="icon">
+            </button>
+          </div>
         </div>
       </div>
     </div>
