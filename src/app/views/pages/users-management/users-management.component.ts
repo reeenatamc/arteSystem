@@ -11,6 +11,7 @@ import { getAuth, updateEmail, sendEmailVerification } from 'firebase/auth';
 export class UsersManagementComponent implements OnInit {
   users: User[] = [];
   selectedUser: User | null = null;
+  originalEmail: string | undefined;
 
   // Variables para la paginación
   currentPage: number = 1;
@@ -30,36 +31,28 @@ export class UsersManagementComponent implements OnInit {
 
   editUser(user: User): void {
     this.selectedUser = { ...user };
+    this.originalEmail = user.email; // Guardamos el email original al iniciar la edición
   }
 
   async saveUser(): Promise<void> {
     if (this.selectedUser) {
       try {
-        const auth = getAuth();
-        const currentUser = auth.currentUser;
-
-        if (currentUser) {
-          // Actualizar el correo electrónico en Firebase Authentication si ha cambiado
-          if (this.selectedUser.email !== currentUser.email) {
-            await updateEmail(currentUser, this.selectedUser.email);
-            // Envía el correo de verificación
-            await sendEmailVerification(currentUser);
-            alert('Se ha enviado un correo de verificación al nuevo correo electrónico. Por favor, verifícalo antes de continuar.');
-            // No actualices Firestore hasta que el correo sea verificado
-            return;
-          }
-
-          // Actualizar el usuario en Firestore usando el método del servicio
-          await this.firebaseService.updateUser(this.selectedUser);
-
-          this.selectedUser = null;
-          this.loadUsers();
-          console.log('User updated successfully in database');
+        // Actualizamos el email en Firestore directamente
+        if (this.selectedUser.email !== this.originalEmail) {
+          await this.firebaseService.updateUserEmail(this.selectedUser.id, this.selectedUser.email);
+          alert('El email del usuario ha sido actualizado en la base de datos.');
         } else {
-          throw new Error('No hay usuario autenticado');
+          // Si el email no ha cambiado, simplemente actualizamos el resto de los campos
+          await this.firebaseService.updateUser(this.selectedUser);
         }
+
+        this.selectedUser = null;
+        this.originalEmail = undefined;
+        this.loadUsers();
+        console.log('Usuario actualizado con éxito en la base de datos');
+        alert('Usuario actualizado con éxito');
       } catch (error) {
-        console.error('Error updating user:', error);
+        console.error('Error al actualizar el usuario:', error);
         let errorMessage = 'Hubo un error al intentar actualizar el usuario. Por favor, inténtalo de nuevo.';
         if (error instanceof Error) {
           errorMessage += ' Detalles: ' + error.message;
@@ -71,6 +64,7 @@ export class UsersManagementComponent implements OnInit {
 
   cancelEdit(): void {
     this.selectedUser = null;
+    this.originalEmail = undefined;
   }
 
   deleteUser(userId: string): void {
