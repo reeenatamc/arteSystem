@@ -22,7 +22,7 @@ export class UploadPieceComponent {
     image: '',
     price: 0,
     subcategory: '',
-    stock: 0,
+    stock: 1,
     author: 's',
     verification: false,
     height: 0,
@@ -109,8 +109,19 @@ export class UploadPieceComponent {
 
   async onSubmit(): Promise<void> {
     console.log('Piece: ', this.piece);
-    if (!this.piece.name || !this.piece.type || !this.piece.description || !this.piece.author) {
-      console.error('All fields are required');
+    if (
+      !this.piece.name || 
+      !this.piece.type || 
+      !this.piece.description || 
+      !this.piece.author || 
+      !this.piece.height || 
+      !this.piece.width || 
+      this.piece.height <= 0 || 
+      this.piece.width <= 0
+    ) {
+      // Mostrar un mensaje de alerta si falta algún campo
+      alert('Por favor, complete todos los campos obligatorios. Asegúrese de que las dimensiones (height y width) sean mayores a 0.');
+      console.error('All fields are required, including height and width greater than 0.');
       return;
     }
 
@@ -130,6 +141,9 @@ export class UploadPieceComponent {
       } catch (error) {
         console.error('Error uploading piece: ', error);
       }
+    }else {
+      alert('Por favor, seleccione una imagen para subir.');
+      console.error('No image selected.');
     }
   }
 }
