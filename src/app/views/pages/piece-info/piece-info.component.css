@@ -244,16 +244,23 @@
 }
 
 .interest-info button {
-  color: white;
+  color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background-color: #8B171747 ;
+  font-size: 12px;
+  padding: 3px;
+
 }
 
 .interest-info button:hover {
-  background-color: #ffca28;
-  opacity: 0.6;
+  background-color: #9c3939;
+  color: white;
+
 }
+
+
 
 
 /* Imagen dentro de recomendaciones */

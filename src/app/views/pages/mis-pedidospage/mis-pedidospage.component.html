@@ -1,7 +1,9 @@
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading" >
 
   <div *ngIf="sales.length > 0; else noSales">
     <!-- Controles de paginación -->
+    <h2 class = "maintext">Pedidos</h2>
+
     <div class="pagination">
       <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index"
         [class.active]="currentPage === i + 1">

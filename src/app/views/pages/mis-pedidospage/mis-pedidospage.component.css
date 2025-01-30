@@ -1,3 +1,9 @@
+.maintext{
+  text-align: center;
+  margin-top: 2%;
+
+}
+
 .sale-card {
   display: flex;
   justify-content: space-between;

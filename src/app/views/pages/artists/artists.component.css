@@ -1,3 +1,7 @@
+.maintext{
+    text-align: center;
+    margin-top: 2%;
+}
 .store-container {
     width: 70%;
     margin: 0 auto;
