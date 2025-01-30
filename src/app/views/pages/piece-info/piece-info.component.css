@@ -278,11 +278,140 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-height: 225px;
   max-height: 225px;
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+
+.artist-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn-content {
+  display: flex; /* Utiliza flexbox para organizar la imagen y el texto */
+  flex-direction: column; /* Organiza los elementos en columna */
+  align-items: center; /* Centra la imagen y el texto */
+  justify-content: center; /* Alinea los elementos de manera central */
+  gap: 5px; /* Espacio entre la imagen y el texto */
+}
+
+
+.edit-btn, .delete-btn {
+  background: none; /* Quita el fondo */
+  border: none; /* Quita el borde */
+  padding: 0; /* Quita el espacio interno */
+  cursor: pointer; /* Cambia el cursor a mano */
+  display: flex; /* Cambié a flex para organizar verticalmente */
+  flex-direction: column; /* Organiza los elementos en columna */
+  align-items: center; /* Centra la imagen y el texto */
+  justify-content: center; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-btn img, .delete-btn img {
+  width: 40px; /* Tamaño de la imagen */
+  height: 40px;
+}
+
+.edit-btn span, .delete-btn span {
+  font-size: 14px; /* Tamaño del texto */
+  text-align: center; /* Centra el texto */
+  font-weight: lighter;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+}
+
+.edit-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(95%) saturate(2654%) hue-rotate(220deg) brightness(90%) contrast(105%);
+}
+
+.delete-btn:hover img {
+  filter: brightness(0) saturate(100%) invert(17%) sepia(94%) saturate(7490%) hue-rotate(2deg) brightness(102%) contrast(106%);
 }
 
 
 
+/* FORMULARIO */
+/* Estilo general para el formulario de edición */
 
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Asegura que el formulario no se desborde horizontalmente */
+  max-width: 100%;
+  height: 100%; /* Permite que el formulario ocupe todo el alto del contenedor */
+  overflow-x:hidden; /* Agrega un scroll vertical si el contenido excede */
+  box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+  flex-grow: 1; /* Hace que el formulario se expanda para llenar el contenedor */
+}
+
+.edit-form-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 90%;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-btn {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.save-btn {
+  background-color: #4caf50;
+  color: white;
+  margin-top: 15px;
+}
+
+.save-btn:hover {
+  background-color: #45a049;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  margin-top: 10px;
+}
+
+.cancel-btn:hover {
+  background-color: #d32f2f;
+}
 
 /*  */
 

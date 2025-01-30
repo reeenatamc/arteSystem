@@ -57,40 +57,49 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
-          
+
           <div class="artist-actions" *ngIf="currentUser?.role === 'artist'">
             <h3>Tú decides sobre tus obras...</h3>
             <div class="artist-actions-container">
-            <button (click)="editPiece(piece)">Editar obra</button>
-            <button (click)="deletePiece(pieceId)">Eliminar obra</button>
-            <div *ngIf="isEditing" class="edit-form">
-              <h2>Editar Obra</h2>
-              <label>Título:</label>
-              <input type="text" [(ngModel)]="selectedPiece.name">
-            
-              <label>Descripción:</label>
-              <textarea [(ngModel)]="selectedPiece.description"></textarea>
-            
-              <label>Precio:</label>
-              <input type="number" [(ngModel)]="selectedPiece.price">
-            
-              <label>Altura (cm):</label>
-              <input type="number" [(ngModel)]="selectedPiece.height">
-            
-              <label>Ancho (cm):</label>
-              <input type="number" [(ngModel)]="selectedPiece.width">
-            
-              <button (click)="saveChanges()">Guardar cambios</button>
-              <button (click)="cancelEdit()">Cancelar</button>
+              <button *ngIf="!isEditing" (click)="editPiece(piece)" class="edit-btn">
+                <div class="btn-content">
+                  <img src="\assets\media\edit-icon.svg" alt="Editar" class="icon">
+                  <span>Editar</span>
+                </div>
+              </button>
+
+              <button *ngIf="!isEditing" (click)="deletePiece(pieceId)" class="delete-btn">
+                <div class="btn-content">
+                  <img src="\assets\media\delete-icon.svg" alt="Eliminar" class="icon">
+                  <span>Eliminar</span>
+                </div>
+              </button>
+              <div *ngIf="isEditing" class="edit-form">
+                <h2 class="edit-form-title">Editar Obra</h2>
+
+                <label class="form-label">Título:</label>
+                <input type="text" [(ngModel)]="selectedPiece.name" class="form-input">
+
+                <label class="form-label">Descripción:</label>
+                <textarea [(ngModel)]="selectedPiece.description" class="form-input"></textarea>
+
+                <label class="form-label">Precio:</label>
+                <input type="number" [(ngModel)]="selectedPiece.price" class="form-input">
+
+                <label class="form-label">Altura (cm):</label>
+                <input type="number" [(ngModel)]="selectedPiece.height" class="form-input">
+
+                <label class="form-label">Ancho (cm):</label>
+                <input type="number" [(ngModel)]="selectedPiece.width" class="form-input">
+
+                <button (click)="saveChanges()" class="form-btn save-btn">Guardar cambios</button>
+                <button (click)="cancelEdit()" class="form-btn cancel-btn">Cancelar</button>
+              </div>
+
             </div>
           </div>
-          </div>
-
-          
-          
-
         </div>
       </div>
     </div>
