@@ -29,11 +29,14 @@ export class ReviewsComponent implements OnInit {
   currentPage: number = 1;
   piecesPerPage: number = 4;
 
+  reviews: Review[] = []; // Lista de reseñas
+
+
   constructor(
     private route: ActivatedRoute,
     private firebaseService: FirebaseService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -49,6 +52,10 @@ export class ReviewsComponent implements OnInit {
         this.review.user = user;
       }
     });
+
+    this.firebaseService.getReviews().subscribe((reviews: Review[]) => {
+      this.reviews = reviews || []; // Asegurar que reviews no sea null
+    });
   }
 
   loadSale(saleId: string): void {
@@ -63,6 +70,27 @@ export class ReviewsComponent implements OnInit {
   }
 
   submitReview(): void {
+
+    if (!this.currentUser) {
+      alert("Debes iniciar sesión para dejar una reseña.");
+      return;
+    }
+
+    if (!this.selectedPiece) {
+      alert("Selecciona una pieza antes de enviar tu reseña.");
+      return;
+    }
+
+    // Verificar si el usuario ya ha reseñado este producto
+    const yaResenado = this.reviews?.some(
+      (review) => review.piece?.id === this.selectedPiece?.id && review.user?.id === this.currentUser?.id
+    );
+
+    if (yaResenado) {
+      alert("Ya has dejado una reseña para este producto.");
+      return;
+    }
+
     this.firebaseService.addReview(this.review).then(() => {
       alert('Reseña enviada con éxito');
       this.selectedPiece = null;
