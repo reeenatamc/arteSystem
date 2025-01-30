@@ -13,6 +13,31 @@
   font-size: 12px;
 }
 
+.upload-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  width: 100%;
+}
+
+.upload-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/assets/publi.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1; /* Asegura que el fondo quede detrás del contenido */
+  filter: brightness(50%); /* Oscurece la imagen */
+}
+
 
 .image-upload {
   flex: 1;
@@ -27,6 +52,9 @@
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
   transition: all 0.3s ease;
+  background: rgba(188, 221, 255, 0.9); /* Agrega un fondo semitransparente */
+  width: 90%;
+  max-width: 500px; /* Limita el ancho para que se vea bien */
 }
 
 .image-upload:hover {
@@ -92,6 +120,10 @@
   border-radius: 10px;
   background: #ffffff; /* Fondo blanco */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra para las celdas */
+  background: rgba(255, 255, 255, 0.9); /* Agrega un fondo semitransparente */
+  width: 90%;
+  max-width: 500px; /* Limita el ancho para que se vea bien */
+
 }
 
 .form-fields form div {
