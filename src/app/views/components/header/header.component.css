@@ -111,6 +111,12 @@
   color: #8B1717;
   font-weight: bold;
 }
+
+.header-left .icon {
+  width: 80px; /* Aumenta el ancho del logo */
+  height: auto; /* Mantiene la proporción */
+}
+
 /* Media query for mobile screens */
 @media (max-width: 768px) {
   .title {
