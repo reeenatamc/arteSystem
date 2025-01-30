@@ -18,7 +18,9 @@
           <p><strong>Dimensiones:</strong> {{ piece.width }} x {{ piece.height }}</p>
           <p class="price">{{ piece.price | currency }}</p>
           <span class="piece-type">{{ piece.subcategory }}</span>
-          <button class="add-to-cart" (click)="addToCart(piece)">Añadir al carrito</button>
+          <button class="add-to-cart" (click)="addToCart(piece)">
+            <i class="cart-icon">🛒</i> Agregar al carrito
+          </button>
 
         </div>
         <div class="colum-container">
@@ -55,7 +57,10 @@
                 <div class="interest-info">
                   <h4>{{ piece.name }}</h4>
                   <p>{{ piece.price | currency }}</p>
-                  <button (click)="addToCart(piece.id)">Añadir al carrito</button>
+                  <button (click)="addToCart(piece)">
+                    <i class="cart-icon">🛒</i> Agregar al carrito
+
+                  </button>
                 </div>
               </div>
             </div>

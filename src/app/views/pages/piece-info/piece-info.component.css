@@ -254,6 +254,7 @@
 
 }
 
+
 .interest-info button:hover {
   background-color: #9c3939;
   color: white;
@@ -414,6 +415,26 @@
 }
 
 /*  */
+
+.add-to-cart{
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #8B171747 ;
+  font-size: 12px;
+  padding: 3px;
+  margin-left: 15px;
+  width: 25%;
+
+}
+
+.add-to-cart:hover{
+  background-color: #9c3939;
+  color: white;
+  
+
+}
 
 
 
