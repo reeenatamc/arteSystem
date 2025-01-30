@@ -3,6 +3,10 @@
   margin: 0 auto;
   text-align: center;
 }
+.maintext{
+  margin-top: 2%;
+  text-align: center;
+}
 
 .cards-container {
   display: grid;

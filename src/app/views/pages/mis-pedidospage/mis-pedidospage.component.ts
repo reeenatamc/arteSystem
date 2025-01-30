@@ -13,9 +13,10 @@ import { LoadingService } from '../../../services/loading.service';
 })
 export class MisPedidospageComponent implements OnInit {
   sales: Sale[] = [];
+  filteredSales: Sale[] = []; // Lista filtrada de pedidos
   currentUser: any;
   isLoading: boolean = false;
-
+  searchQuery: string = ''; // 🔹 Variable de búsqueda
 
   // Variables para la paginación
   currentPage: number = 1;
@@ -32,6 +33,7 @@ export class MisPedidospageComponent implements OnInit {
     this.loadingService.loading$.subscribe((isLoading) => {
       this.isLoading = isLoading;
     });
+
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.currentUser = user;
@@ -42,14 +44,21 @@ export class MisPedidospageComponent implements OnInit {
   }
 
   loadSales(clientId: string): void {
-    this.loadingService.show(); 
+    this.loadingService.show();
 
     this.firebaseService.getSalesByClient(clientId).subscribe((sales: Sale[]) => {
       this.sales = sales;
-
+      this.filteredSales = sales; // Inicialmente, todas las ventas
       this.loadingService.hide();
-
     });
+  }
+
+  // 🔹 Filtrar ventas por ID del pedido
+  applyFilters(): void {
+    this.filteredSales = this.sales.filter(sale =>
+      sale.id.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+    this.currentPage = 1; // Reiniciar a la primera página después del filtrado
   }
 
   navigateToReviews(saleId: string): void {
@@ -58,13 +67,13 @@ export class MisPedidospageComponent implements OnInit {
 
   // Métodos para la paginación
   get totalPages(): number {
-    return Math.ceil(this.sales.length / this.salesPerPage);
+    return Math.ceil(this.filteredSales.length / this.salesPerPage);
   }
 
   get paginatedSales(): Sale[] {
     const start = (this.currentPage - 1) * this.salesPerPage;
     const end = start + this.salesPerPage;
-    return this.sales.slice(start, end);
+    return this.filteredSales.slice(start, end);
   }
 
   changePage(page: number): void {

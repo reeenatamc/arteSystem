@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading">
   <div class="category-container">
-    <h1>Categorías principales</h1>
+    <h2 class = "maintext">Categorías principales</h2>
     <div class="cards-container">
       <div *ngFor="let card of cards" class="card" (click)="navigateToType(card.type)">
         <img [src]="card.image" alt="{{ card.name }}">

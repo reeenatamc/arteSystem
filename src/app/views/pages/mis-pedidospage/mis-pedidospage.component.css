@@ -16,7 +16,7 @@
   /* Centra la tarjeta horizontalmente */
   max-width: 800px;
   /* Ancho máximo de la tarjeta */
-  width: 90%;
+  width: 48%;
   /* Asegura que la tarjeta ocupe el 100% del contenedor */
 }
 
@@ -152,6 +152,45 @@
   /* Ajusta el tamaño según necesites */
   margin-bottom: 10px;
 }
+
+.search-box {
+  gap: 8px;
+  max-width: 300px;
+  margin: 16px 0; /* Ajuste de margen */
+  display:flex;
+  align-items: center;
+  margin-left: 25%;
+}
+
+
+.search-box label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: #EF8A17;
+  box-shadow: 0 0 5px #EF8A17;
+  background-color: #fff;
+}
+
+.search-box input::placeholder {
+  color: #aaa;
+}
+
 
 /* Media query para dispositivos móviles */
 @media (max-width: 600px) {
