@@ -1,50 +1,50 @@
 .artist-profile-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #ECC30B;
+  justify-content: space-between;
+  background: #ECC30B; /* Fondo amarillo */
+  padding: 10px 10%; /* Espaciado para los lados */
   width: 100%;
+  height: auto;
+  box-sizing: border-box; /* Incluye padding en el cálculo de ancho */
+  overflow: hidden;
 }
 
 .artist-name {
   flex: 1;
-  text-align: center;
-  margin: auto;
-  font-size: 50px;
-  font-weight: 600;
-  margin-left: 10%;
-}
-
-.artist-name h1 {
-  font-size: 36px;
-  margin: 0;
+  font-size: 2rem; /* Tamaño de texto grande */
+  font-weight: bold;
+  text-align: left;
+  color: #000; /* Color negro para el texto */
+  margin-right: 5%; /* Espacio entre el nombre y la imagen */
 }
 
 .artist-image {
-  flex: 1;
+  flex: 0 0 auto;
   text-align: center;
-  padding: 10px;
-  margin: auto;
-  margin-left: -10%;
 }
 
 .artist-image img {
-  height: 33vh;
+  height: 35vh; /* Altura fija proporcional a la ventana */
+  width: auto; /* Ajustar el ancho automáticamente */
+  object-fit: cover; /* Recorta la imagen si es necesario */
+  border-radius: 8px; /* Bordes redondeados opcionales */
 }
 
+
 .artist-description {
-  flex: 1;
+  flex: 2;
   text-align: justify;
-  padding: 10px;
-  width: 50%;
-margin-right: 10%;
-font-weight: 400;
-font-size: 20px;
+  color: #000; /* Color negro */
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-left: 5%; /* Espacio entre la descripción y la imagen */
 }
 
 .artist-description p {
   margin: 0;
 }
+
 
 .background-container {
   display: flex;
@@ -86,32 +86,33 @@ font-size: 20px;
 
 .artworks-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden; /* Desactiva el scroll horizontal innecesario */
+  padding: 20px;
+  box-sizing: border-box; /* Incluye padding en el cálculo de ancho */
 }
 
 .artworks {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  width: 90%;
-  flex-shrink: 0;
+  display: grid; /* Cambia a grid */
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual ancho */
+  gap: 20px; /* Espaciado entre tarjetas */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
 }
 
 .artwork-card {
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 220px;
+  width: 100%; /* Ajusta la tarjeta al ancho de la columna */
   text-align: center;
-  flex-shrink: 0;
 }
 
 .artwork-card img {
   width: 100%;
-  height: 300px;
+  height: 300px; /* Altura fija para las imágenes */
   border-radius: 10px;
-  object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+  object-fit: cover; /* Mantén proporciones y rellena el espacio */
 }
+
 .search-container {
   display: flex;
   justify-content: center;
