@@ -151,6 +151,34 @@ body {
   opacity: 0.8;
 }
 
+/*  */
+/*  */
+
+
+.edit-btn, .delete-btn{
+  background: none; /* Quita el fondo */
+  border: none; /* Quita el borde */
+  padding: 0; /* Quita el espacio interno */
+  cursor: pointer; /* Cambia el cursor a mano */
+  display: inline-flex; /* Ajusta el tamaño al contenido */
+  align-items: center; /* Centra la imagen */
+  justify-content: center; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-btn img, .delete-btn img {
+  width: 30px; /* Reduce el tamaño de la imagen */
+  height: 30px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+}
+
+.edit-btn:hover{
+  filter: brightness(0) saturate(100%) invert(32%) sepia(95%) saturate(2654%) hue-rotate(220deg) brightness(90%) contrast(105%);}
+
+
 /* Botón de Guardar Cambios */
 .confirm-button {
   background-color: #4CAF50; /* Verde */
