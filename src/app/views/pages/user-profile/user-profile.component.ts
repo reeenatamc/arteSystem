@@ -110,7 +110,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             // No actualices Firestore hasta que el correo sea verificado
             return;
           }
-          // Actualizar el usuario en Firestore usando el método del servicio
+  
+          // Si hay una imagen seleccionada, súbela a Supabase y obtén la URL
+          if (this.selectedImage) {
+            const imageUrl = await this.supabaseService.uploadImage(this.selectedImage);
+            // Actualiza la URL de la imagen en el objeto user
+            this.user.image = imageUrl;
+          }
+  
+          // Actualizar el usuario en Firestore usando el método del servicio, incluyendo la nueva URL de la imagen
           await this.authService.updateUserInFirestore(this.user);
   
           this.isEditing = false;
