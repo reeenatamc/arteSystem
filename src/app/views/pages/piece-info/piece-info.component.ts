@@ -28,6 +28,24 @@ export class PieceInfoComponent implements OnInit {
   visibleReviews = 6;
   isExpanded = false;
   suggestedPieces: Piece[] = [];
+  // selectedPiece: Piece | null = null; 
+isEditing: boolean = false;
+
+selectedPiece: Piece = {
+  id: '',
+  name: '',
+  type: '',
+  subcategory: '',
+  description: '',
+  image: '',
+  price: 0,
+  stock: 0,
+  author: '',
+  height: 0,
+  width: 0,
+  verification: false
+};
+
 
 
   constructor(
@@ -102,6 +120,65 @@ export class PieceInfoComponent implements OnInit {
       this.isExpanded = !this.isExpanded;
     }
   }
+
+  editPiece(piece: Piece): void {
+    this.selectedPiece = { ...piece }; // Copia los datos de la obra seleccionada
+    this.isEditing = true; // Muestra el formulario
+  }
+  
+  saveChanges(): void {
+    if (this.selectedPiece) {
+      this.firestoreService.updatePiece(this.selectedPiece.id, this.selectedPiece)
+        .then(() => {
+          alert('Obra actualizada con éxito');
+          this.isEditing = false; // Cierra el formulario después de guardar
+        })
+        .catch(error => {
+          console.error('Error al actualizar la obra:', error);
+          alert('Hubo un error al actualizar la obra.');
+        });
+    }
+  }
+  
+  cancelEdit(): void {
+    this.isEditing = false;
+    this.selectedPiece = {
+      id: '',
+      name: '',
+      type: '',
+      subcategory: '',
+      description: '',
+      image: '',
+      price: 0,
+      stock: 0,
+      author: '',
+      height: 0,
+      width: 0,
+      verification: false
+    };
+  }
+  
+  
+  deletePiece(pieceId: string | null): void {
+    if (!pieceId) {
+      console.error('No hay ID de obra para eliminar.');
+      return;
+    }
+  
+    const confirmDelete = confirm('¿Estás seguro de que quieres eliminar esta obra?');
+    if (confirmDelete) {
+      this.firestoreService.deletePieceById(pieceId)
+        .then(() => {
+          alert('Obra eliminada con éxito');
+          this.router.navigate(['/']); // Redirigir a la página principal o galería
+        })
+        .catch(error => {
+          console.error('Error eliminando la obra:', error);
+          alert('Hubo un error al eliminar la obra.');
+        });
+    }
+  }
+  
 
   onMouseMove(event: MouseEvent) {
     const lens = document.querySelector('.zoom-lens') as HTMLElement;

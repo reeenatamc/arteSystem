@@ -261,6 +261,32 @@
 }
 
 
+/*  */
+
+.artist-actions {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 20px;
+  width: 50%;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 50%;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-height: 225px;
+  max-height: 225px;
+}
+
+
+
+
+
+/*  */
+
+
 
 
 /* Imagen dentro de recomendaciones */

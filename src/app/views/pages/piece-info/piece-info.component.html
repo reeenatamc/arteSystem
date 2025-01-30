@@ -43,7 +43,7 @@
               </ng-container>
             </div>
           </div>
-          <div class="interests">
+          <div class="interests" *ngIf="currentUser?.role === 'client'">
             <h3>Quizá te interese</h3>
             <div class="interests-container">
               <div class="interest-item" *ngFor="let piece of suggestedPieces | slice:0:2">
@@ -59,6 +59,38 @@
             </div>
             
           </div>
+          
+          <div class="artist-actions" *ngIf="currentUser?.role === 'artist'">
+            <h3>Tú decides sobre tus obras...</h3>
+            <div class="artist-actions-container">
+            <button (click)="editPiece(piece)">Editar obra</button>
+            <button (click)="deletePiece(pieceId)">Eliminar obra</button>
+            <div *ngIf="isEditing" class="edit-form">
+              <h2>Editar Obra</h2>
+              <label>Título:</label>
+              <input type="text" [(ngModel)]="selectedPiece.name">
+            
+              <label>Descripción:</label>
+              <textarea [(ngModel)]="selectedPiece.description"></textarea>
+            
+              <label>Precio:</label>
+              <input type="number" [(ngModel)]="selectedPiece.price">
+            
+              <label>Altura (cm):</label>
+              <input type="number" [(ngModel)]="selectedPiece.height">
+            
+              <label>Ancho (cm):</label>
+              <input type="number" [(ngModel)]="selectedPiece.width">
+            
+              <button (click)="saveChanges()">Guardar cambios</button>
+              <button (click)="cancelEdit()">Cancelar</button>
+            </div>
+          </div>
+          </div>
+
+          
+          
+
         </div>
       </div>
     </div>

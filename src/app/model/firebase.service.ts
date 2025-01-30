@@ -39,6 +39,15 @@ export class FirebaseService {
     ).valueChanges();
   }
 
+  deletePieceById(pieceId: string): Promise<void> {
+    return this.firestore.collection('pieces').doc(pieceId).delete();
+  }
+
+  updatePiece(pieceId: string, updatedData: Partial<Piece>): Promise<void> {
+    return this.firestore.collection('pieces').doc(pieceId).update(updatedData);
+  }
+  
+
   getArtists(): Observable<User[]> {
     return this.firestore.collection<User>('users', ref => ref.where('role', '==', 'artist')).valueChanges();
   }
