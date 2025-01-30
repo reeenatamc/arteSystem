@@ -20,8 +20,8 @@
     </div>
     <div *ngIf="pieces$ | async as pieces;">
       <div class="cards-container">
-        <div *ngFor="let piece of filteredPieces$ | async" class="piece-card" (click)="onCardClick(piece.id)">
-          <img [src]="piece.image" alt="{{ piece.name }}">
+        <div *ngFor="let piece of filteredPieces$ | async" class="piece-card">
+          <img [src]="piece.image" alt="{{ piece.name }}" (click)="onCardClick(piece.id)">
           <div class="card-details">
             <h2>{{ piece.name }} <span class="piece-type">{{ piece.subcategory }}</span></h2>
             <div class="reviews">

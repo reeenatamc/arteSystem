@@ -97,12 +97,12 @@ selectedPiece: Piece = {
   //   this.router.navigate(['/pieceInfo'], { queryParams: { id: pieceId } });
   // }
 
-  onCardClick(pieceId: string, piece: any): void {
-    this.cartService.addToCart(piece);
-    alert('Obra agregada al carrito!');
-    this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
+  // onCardClick(pieceId: string, piece: any): void {
+  //   this.cartService.addToCart(piece);
+  //   alert('Obra agregada al carrito!');
+  //   this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
     
-  }
+  // }
 
   showMoreReviews() {
     if (this.reviews$) {
@@ -211,6 +211,15 @@ selectedPiece: Piece = {
     const image = document.querySelector('.image') as HTMLImageElement;
     if (lens) lens.style.display = 'none';
     if (image) image.style.transform = 'scale(1)';
+  }
+
+  addToCart(piece: any) {
+    this.cartService.addToCart(piece);
+    alert('Obra agregada al carrito!');
+  }
+
+  onCardClick(pieceId: string): void {
+    this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
   }
   
 
