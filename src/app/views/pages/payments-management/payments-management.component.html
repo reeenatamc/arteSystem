@@ -1,47 +1,77 @@
 <div *ngIf="!isLoading">
+  <!-- Mostrar solo cuando isLoading es falso (no está cargando datos) -->
+  
+  <div *ngIf="sales.length > 0; else noSales">
+    <!-- Si hay ventas en el arreglo sales, muestra este bloque, si no, muestra el template noSales -->
 
-<div *ngIf="sales.length > 0; else noSales">
-  <!-- Controles de paginación -->
-  <div class="pagination">
-    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
-      {{ i + 1 }}
-    </button>
-  </div>
+    <!-- Controles de paginación -->
+    <div class="pagination">
+      <!-- Botones de paginación -->
+      <button (click)="changePage(i + 1)" 
+        *ngFor="let page of [].constructor(totalPages); let i = index" 
+        [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+      <!-- El *ngFor itera sobre un arreglo de longitud totalPages (cuántas páginas hay), y genera un botón por cada página -->
+      <!-- La expresión currentPage === i + 1 agrega la clase 'active' al botón que corresponde a la página actual -->
+    </div>
 
-  <div *ngFor="let sale of paginatedSales" class="sale-card">
-    <div class="sale-info">
-      <h3>Pedido ID: {{ sale.id }}</h3>
-      <p>Total: {{ sale.total | currency }}</p>
-      <p [ngClass]="sale.status ? 'verification-true' : 'verification-false'">
-        {{ sale.status ? 'Completado' : 'Pendiente' }}
-      </p>
-      <div class="pieces">
-        <div *ngFor="let piece of sale.piece" class="piece">
-          <img [src]="piece.image" alt="{{ piece.name }}">
+    <!-- Iteración sobre las ventas paginadas -->
+    <div *ngFor="let sale of paginatedSales" class="sale-card">
+      <div class="sale-info">
+        <!-- Muestra la información del pedido -->
+        <h3>Pedido ID: {{ sale.id }}</h3>
+        <p>Total: {{ sale.total | currency }}</p>
+        <!-- Muestra el total con el formato de moneda -->
+        
+        <p [ngClass]="sale.status ? 'verification-true' : 'verification-false'">
+          <!-- Asigna una clase dinámica según el estado del pedido (completado o pendiente) -->
+          {{ sale.status ? 'Completado' : 'Pendiente' }}
+        </p>
+
+        <div class="pieces">
+          <div *ngFor="let piece of sale.piece" class="piece">
+            <!-- Muestra las piezas asociadas al pedido, iterando sobre cada pieza -->
+            <img [src]="piece.image" alt="{{ piece.name }}">
+            <!-- Muestra una imagen de la pieza -->
+          </div>
+        </div>
+        
+        <button *ngIf="sale.status">Dar reseñas</button>
+        <!-- Si el pedido está completado (sale.status es verdadero), muestra un botón para dar reseñas -->
+      </div>
+
+      <div class="payment-proof">
+        <a [href]="sale.imagePayment" target="_blank">Ver Comprobante de Pago</a>
+        <!-- Muestra un enlace para ver el comprobante de pago asociado al pedido -->
+
+        <div class="action-buttons">
+          <!-- Botones para verificar o rechazar el pedido -->
+          <button class="btn-verify" (click)="updateSaleStatus(sale.id, true)">Verificar</button>
+          <button class="btn-reject" (click)="updateSaleStatus(sale.id, false)">Rechazar</button>
+          <!-- Al hacer clic en estos botones, se ejecuta el método updateSaleStatus pasándole el ID del pedido y el nuevo estado -->
         </div>
       </div>
-      <button *ngIf="sale.status">Dar reseñas</button>
     </div>
-    <div class="payment-proof">
-      <a [href]="sale.imagePayment" target="_blank">Ver Comprobante de Pago</a>
-      <div class="action-buttons">
-        <button class="btn-verify" (click)="updateSaleStatus(sale.id, true)">Verificar</button>
-        <button class="btn-reject" (click)="updateSaleStatus(sale.id, false)">Rechazar</button>
-      </div>
+
+    <!-- Controles de paginación (repetidos abajo) -->
+    <div class="pagination">
+      <button (click)="changePage(i + 1)" 
+        *ngFor="let page of [].constructor(totalPages); let i = index" 
+        [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+      <!-- Repetición de los botones de paginación -->
     </div>
   </div>
 
-  <!-- Controles de paginación (repetidos abajo) -->
-  <div class="pagination">
-    <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
-      {{ i + 1 }}
-    </button>
-  </div>
-</div>
-<ng-template #noSales>
-  <div class="no-sales-container">
-    <img src="\assets\media\error.svg" alt="Sin pedidos" class="no-sales-image">
-    <p class = "pedidos-text">Estas al día. No tienes pedidos por verificar.</p>
-  </div>
-</ng-template>
+  <!-- Template para mostrar cuando no hay ventas -->
+  <ng-template #noSales>
+    <div class="no-sales-container">
+      <!-- Muestra una imagen y un mensaje indicando que no hay pedidos por verificar -->
+      <img src="\assets\media\error.svg" alt="Sin pedidos" class="no-sales-image">
+      <p class="pedidos-text">Estas al día. No tienes pedidos por verificar.</p>
+    </div>
+  </ng-template>
+
 </div>

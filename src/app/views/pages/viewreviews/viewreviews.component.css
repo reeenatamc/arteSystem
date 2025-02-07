@@ -1,9 +1,21 @@
 .reviews-container {
-  width: 80%;
+  width: 100%;
   margin: auto;
   text-align: center;
   margin-top: 2%;
 }
+
+
+  .reviews-grid {
+    display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 tarjetas por fila */
+  gap: 20px; /* Espaciado entre tarjetas */
+  justify-content: center;
+  width: 100%; /* Ocupar todo el ancho */
+  max-width: 1200px; /* Limitar el ancho total */
+  margin: 0 auto; 
+  }
+
 
 .reviews-container ul {
   list-style-type: none;
@@ -12,38 +24,40 @@
 }
 
 .review-item {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .review-card {
+  width: 275px;
+  height: 400px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 10px;
+  text-align: left;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: left;
   background-color: #fff;
   transition: transform 0.3s;
-  max-width: 600px;
-  margin: auto;
+  overflow-y: auto;
 }
 
 .review-card:hover {
-  transform: scale(1.02);
-}
+  transform: scale(1.02);}
 
 .piece-image {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 250px; /* Ajusta la imagen para que encaje bien */
   object-fit: cover;
   border-radius: 5px;
-  margin-right: 20px;
 }
 
 .review-info {
-  flex-grow: 1;
-}
+  display: flex;
+  flex-direction: column;
+  }
 
 .stars {
   display: flex;
@@ -163,7 +177,7 @@
   margin: 16px 0; /* Ajuste de margen */
   display:flex;
   align-items: center;
-  margin-left: 25%;
+  margin-left: 8%;
 }
 
 

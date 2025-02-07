@@ -17,7 +17,6 @@ export class MisPedidospageComponent implements OnInit {
   currentUser: any;
   isLoading: boolean = false;
   searchQuery: string = ''; // 🔹 Variable de búsqueda
-
   // Variables para la paginación
   currentPage: number = 1;
   salesPerPage: number = 4;
@@ -27,7 +26,7 @@ export class MisPedidospageComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private loadingService: LoadingService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadingService.loading$.subscribe((isLoading) => {
@@ -45,7 +44,6 @@ export class MisPedidospageComponent implements OnInit {
 
   loadSales(clientId: string): void {
     this.loadingService.show();
-
     this.firebaseService.getSalesByClient(clientId).subscribe((sales: Sale[]) => {
       this.sales = sales;
       this.filteredSales = sales; // Inicialmente, todas las ventas
@@ -61,17 +59,34 @@ export class MisPedidospageComponent implements OnInit {
     this.currentPage = 1; // Reiniciar a la primera página después del filtrado
   }
 
+  copyToClipboard(phoneNumber: string): void {
+    // Usamos la API del portapapeles
+    navigator.clipboard.writeText(phoneNumber).then(() => {
+      // Si se copió correctamente, mostramos una alerta
+      alert('Número copiado al portapapeles!');
+    }).catch(err => {
+      console.error('Error al copiar al portapapeles: ', err);
+      alert('Hubo un problema al copiar el número.');
+    });
+  }
+  // ir a una review de una venta específica
   navigateToReviews(saleId: string): void {
     this.router.navigate(['/reviews'], { queryParams: { saleId } });
   }
 
   // Métodos para la paginación
+
+  //math.ceil para redondear hacia arriba la división
   get totalPages(): number {
     return Math.ceil(this.filteredSales.length / this.salesPerPage);
   }
 
+  // muestra desde que venta se debe mostrar
+
   get paginatedSales(): Sale[] {
+    // muestra desde que venta se debe mostrar
     const start = (this.currentPage - 1) * this.salesPerPage;
+   // muestra desde que venta se debe terminar
     const end = start + this.salesPerPage;
     return this.filteredSales.slice(start, end);
   }

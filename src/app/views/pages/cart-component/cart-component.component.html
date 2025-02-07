@@ -1,9 +1,12 @@
 <div class="cart-container">
-  <button class="back-button" routerLink="/store">← Continuar comprando</button>
+  <!-- Botón para regresar a la tienda -->
+  <button class="back-button" routerLink="/store">&larr; Continuar comprando</button>
   <hr class="divider">
   <div class="cart-content">
     <div class="cart-items">
       <h2>Carrito de Compras</h2>
+      
+      <!-- Verifica si hay elementos en el carrito, si no, muestra el mensaje de carrito vacío -->
       <div *ngIf="cartItems.length > 0; else emptyCart">
         <div *ngFor="let item of cartItems" class="cart-item">
           <img [src]="item.image" alt="{{ item.name }}">
@@ -11,57 +14,57 @@
             <h3>{{ item.name }}</h3>
           </div>
           <p class="item-price">{{ item.price | currency }}</p>
+
+          <!-- currency pipe de moneda, no lo cambien roni y jean -->
+          
+          <!-- Controles de cantidad, asegúrate de que la cantidad no sea menor que 1 -->
           <div class="quantity-controls">
-            <button (click)="updateQuantity(item, item.quantity - 1)">-</button>
+            <button (click)="updateQuantity(item, item.quantity - 1)" [disabled]="item.quantity <= 1">-</button>
             <span>{{ item.quantity }}</span>
             <button (click)="updateQuantity(item, item.quantity + 1)">+</button>
           </div>
+          
+          <!-- Botón para eliminar un producto del carrito -->
           <button class="remove-button" (click)="removeFromCart(item)">Eliminar</button>
         </div>
+        
+        <!-- Botón para vaciar todo el carrito -->
         <button class="clear-cart-button" (click)="clearCart()">Vaciar Carrito</button>
       </div>
+      
+      <!-- Mensaje a mostrar cuando el carrito esté vacío -->
       <ng-template #emptyCart>
         <p>Tu carrito está vacío.</p>
       </ng-template>
     </div>
+    
     <div class="cart-summary">
       <div class="contact-artist">
-        <h3>Contactar artista</h3>
-        <div class="social-icons">
-          <i class="fab fa-instagram"></i>
-          <i class="fab fa-whatsapp"></i>
-          <i class="fas fa-envelope"></i>
-        </div>
+        <h3>Una vez que subas el pago, tendrás que esperar a que sea aprobado!</h3>
       </div>
 
-      <!-- <div class="upload-proof">
-        <label for="proof-upload" class="upload-label">Subir comprobante de pago</label>
-         <input type="file" id="proof-upload"  class="custom-file-upload" (change)="onFileChange($event)">
-         <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M452-202h60v-201l82 82 42-42-156-152-154 154 42 42 84-84v201ZM220-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm331-554v-186H220v680h520v-494H551ZM220-820v186-186 680-680Z"/></svg>       
-
-      </div> -->
-
+      <!-- Sección para subir comprobante de pago -->
       <div class="upload-proof">
         <label for="proof-upload" class="custom-upload-label">
-          <h4 class = "text-pay">Subir comprobante de pago</h4>
-
+          <h4 class="text-pay">Subir comprobante de pago</h4>
+          
+          <!-- Input oculto para subir archivos, asegúrate de manejar correctamente onFileChange -->
           <input type="file" id="proof-upload" class="hidden-file-input" (change)="onFileChange($event)">
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000">
-            <path
-              d="M452-202h60v-201l82 82 42-42-156-152-154 154 42 42 84-84v201ZM220-80q-24 0-42-18t-18-42v-680q0-24 18-42t42-18h361l219 219v521q0 24-18 42t-42 18H220Zm331-554v-186H220v680h520v-494H551ZM220-820v186-186 680-680Z" />
-          </svg> -->
+          
+          <!-- Imagen del ícono de subida -->
           <img src="\assets\media\upload-icon.svg" class="icono-upload" alt="Icono de subida" />
-
         </label>
         
-          <p id="file-name" class="file-name">
-            {{ selectedFile ? 'Seleccionaste: ' + selectedFile.name : 'No se ha seleccionado ningún archivo' }}
-          </p>
-        
+        <!-- Mensaje que muestra el archivo seleccionado -->
+        <p id="file-name" class="file-name">
+          {{ selectedFile ? 'Seleccionaste: ' + selectedFile.name : 'No se ha seleccionado ningún archivo' }}
+        </p>
       </div>
-
-
+      
+      <!-- Mostrar el total del carrito usando el pipe de moneda -->
       <p class="total-price">Total: {{ totalPrice | currency }}</p>
+      
+      <!-- Botón para enviar a revisión -->
       <button class="submit-button" (click)="submitForReview()">Enviar a revisión</button>
     </div>
   </div>

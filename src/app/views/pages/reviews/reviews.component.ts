@@ -82,6 +82,8 @@ export class ReviewsComponent implements OnInit {
     }
 
     // Verificar si el usuario ya ha reseñado este producto
+    //?. asegura que, si this.reviews es null o undefined, no se intente ejecutar el método some()
+    // some para ver si algun elemento en el arreglo cumple con las condiciones
     const yaResenado = this.reviews?.some(
       (review) => review.piece?.id === this.selectedPiece?.id && review.user?.id === this.currentUser?.id
     );
@@ -93,7 +95,9 @@ export class ReviewsComponent implements OnInit {
 
     this.firebaseService.addReview(this.review).then(() => {
       alert('Reseña enviada con éxito');
+      // limpiar pieza seleccionada
       this.selectedPiece = null;
+      // reestablecer review
       this.review = {
         id: '',
         user: this.currentUser,

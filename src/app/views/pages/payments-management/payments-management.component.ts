@@ -29,21 +29,21 @@ export class PaymentsManagementComponent implements OnInit {
 
   loadSales(): void {
     this.loadingService.show(); 
-
     this.firebaseService.getSales().subscribe((sales: Sale[]) => {
       this.sales = sales;
       this.loadingService.hide();
-
     });
   }
 
   updateSaleStatus(saleId: string, status: boolean): void {
     if (status) {
       this.firebaseService.updateSaleStatus(saleId, status).then(() => {
+        //actualizar lista de pedidos/ventas
         this.loadSales();
       });
     } else {
       this.firebaseService.deleteSale(saleId).then(() => {
+        //actualizar lista de pedidos/ventas
         this.loadSales();
       });
     }

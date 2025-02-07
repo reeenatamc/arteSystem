@@ -28,11 +28,16 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    // usuario actual
+
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.currentUser = user;
       }
     });
+
+    // traer items del carrito de compras
 
     this.cartService.getCartItems().subscribe(items => {
       this.cartItems = items;
@@ -40,12 +45,16 @@ export class CartComponent implements OnInit {
     });
   }
 
+  // coge el primer archivo sleccionado, ya que suele permitir subir más cosas.
+
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
     }
   }
+
+  // actualiza con la cantidad actual a partir de sumar o restar
 
   updateQuantity(item: CartItem, quantity: number) {
     this.cartService.updateQuantity(item, quantity);
@@ -64,6 +73,8 @@ export class CartComponent implements OnInit {
     alert('Cart cleared!');
   }
 
+  // reduce para acumular el precio total
+
   calculateTotalPrice() {
     this.totalPrice = this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }
@@ -80,6 +91,9 @@ export class CartComponent implements OnInit {
 
     if (this.selectedFile) {
       try {
+
+        // esperar a que suba el archivo
+        
         paymentProofUrl = await this.supabaseService.uploadImage(this.selectedFile);
       } catch (error) {
         console.error('Error uploading payment proof:', error);

@@ -1,55 +1,95 @@
+<!-- Verifica si piece$ tiene datos (con el pipe async). Si es así asignaaaa los datos a la variable pieces -->
 <div *ngIf="piece$ | async as pieces">
+  
+  <!-- Itera sobre todas las piezas disponibles (asignadas a `pieces`). -->
   <div *ngFor="let piece of pieces" class="piece-info-container">
+    
     <div class="author">
       <!-- <h2>{{ piece.author }}</h2> -->
     </div>
+    
     <div class="piece-details">
+      
+      <!-- Imagen de la pieza, con eventos de mouse para interacción de zoom/lupa -->
       <div class="piece-image" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
         <img [src]="piece.image" alt="{{ piece.name }}" class="image">
-        <div class="zoom-lens"></div> <!-- Contenedor para la lupa -->
+        <!-- Contenedor para la lupa (probablemente activado en `onMouseMove`) -->
+        <div class="zoom-lens"></div>
       </div>
 
       <div class="piece-info-container-right">
         <div class="piece-info">
+          <!-- Nombre de la pieza -->
           <h1>{{ piece.name }}</h1>
+
+          <!-- Descripción de la pieza -->
           <div class="piece-description">
             <p>{{ piece.description }}</p>
           </div>
+          
+          <!-- Dimensiones de la pieza -->
           <p><strong>Dimensiones:</strong> {{ piece.width }} x {{ piece.height }}</p>
+          
+          <!-- Precio de la pieza, usando el pipe currency para formatear como moneda -->
           <p class="price">{{ piece.price | currency }}</p>
+          
+          <!-- Subcategoría de la pieza -->
           <span class="piece-type">{{ piece.subcategory }}</span>
+          
+          <!-- Botón para agregar la pieza al carrito -->
           <button class="add-to-cart" (click)="addToCart(piece)">
             <i class="cart-icon">🛒</i> Agregar al carrito
           </button>
 
         </div>
+
         <div class="colum-container">
+          
+          <!-- Sección de reseñas de la pieza -->
           <div class="reviews-container">
             <div class="reviews">
               <h3>Reseñas</h3>
+              
+              <!-- Usando async pipe para obtener las reseñas de manera asíncrona -->
               <ng-container *ngIf="reviews$ | async as reviews">
+                
+                <!-- Si hay reseñas, se muestran; sino, se muestra un mensaje alternativo -->
                 <div *ngIf="reviews.length > 0; else noReviews">
                   <div *ngFor="let review of reviews.slice(0, visibleReviews)" class="review">
+                    
+                    <!-- Muestra el nombre del usuario y la descripción de la reseña -->
                     <p><strong>{{ review.user.name }}</strong>: {{ review.description }}</p>
+                    
+                    <!-- Mostrar las estrellas según la puntuación -->
                     <span *ngFor="let star of [1, 2, 3, 4, 5]" class="material-icons"
                       [ngClass]="{'filled': star <= review.score}">
                       star
                     </span>
+                    
+                    <!-- Muestra la puntuación de la reseña -->
                     <p>Puntuación: {{ review.score }} / 5</p>
                   </div>
+                  
+                  <!-- Botón para mostrar más o menos reseñas -->
                   <button class="ver-mas-btn" (click)="showMoreReviews()">
                     {{ isExpanded ? 'Mostrar menos' : 'Ver más' }}
                   </button>
                 </div>
+                
+                <!-- Si no hay reseñas, muestra este mensaje -->
                 <ng-template #noReviews>
                   <p>No hay reseñas para esta obra.</p>
                 </ng-template>
               </ng-container>
             </div>
           </div>
+
+          <!-- Sección de "quizá te interese" solo para clientes -->
           <div class="interests" *ngIf="currentUser?.role === 'client'">
             <h3>Quizá te interese</h3>
             <div class="interests-container">
+              
+              <!-- Muestra un par de piezas recomendadas -->
               <div class="interest-item" *ngFor="let piece of suggestedPieces | slice:0:2">
                 <div class="interest-image">
                   <img [src]="piece.image" [alt]="piece.name" class="img-interest">
@@ -57,19 +97,21 @@
                 <div class="interest-info">
                   <h4>{{ piece.name }}</h4>
                   <p>{{ piece.price | currency }}</p>
+                  <!-- Botón para agregar una pieza recomendada al carrito -->
                   <button (click)="addToCart(piece)">
                     <i class="cart-icon">🛒</i> Agregar al carrito
-
                   </button>
                 </div>
               </div>
             </div>
-
           </div>
 
+          <!-- Sección para artistas, donde pueden editar o eliminar sus obras -->
           <div class="artist-actions" *ngIf="currentUser?.role === 'artist'">
             <h3>Tú decides sobre tus obras...</h3>
             <div class="artist-actions-container">
+              
+              <!-- Botón para editar la pieza (si no está en modo de edición) -->
               <button *ngIf="!isEditing" (click)="editPiece(piece)" class="edit-btn">
                 <div class="btn-content">
                   <img src="\assets\media\edit-icon.svg" alt="Editar" class="icon">
@@ -77,15 +119,19 @@
                 </div>
               </button>
 
+              <!-- Botón para eliminar la pieza (si no está en modo de edición) -->
               <button *ngIf="!isEditing" (click)="deletePiece(pieceId)" class="delete-btn">
                 <div class="btn-content">
                   <img src="\assets\media\delete-icon.svg" alt="Eliminar" class="icon">
                   <span>Eliminar</span>
                 </div>
               </button>
+              
+              <!-- Formulario de edición, solo visible si `isEditing` es verdadero -->
               <div *ngIf="isEditing" class="edit-form">
                 <h2 class="edit-form-title">Editar Obra</h2>
 
+                <!-- Campos para editar los detalles de la obra -->
                 <label class="form-label">Título:</label>
                 <input type="text" [(ngModel)]="selectedPiece.name" class="form-input">
 
@@ -101,6 +147,7 @@
                 <label class="form-label">Ancho (cm):</label>
                 <input type="number" [(ngModel)]="selectedPiece.width" class="form-input">
 
+                <!-- Botones para guardar o cancelar cambios -->
                 <button (click)="saveChanges()" class="form-btn save-btn">Guardar cambios</button>
                 <button (click)="cancelEdit()" class="form-btn cancel-btn">Cancelar</button>
               </div>
@@ -110,6 +157,8 @@
         </div>
       </div>
     </div>
+    
+    <!-- Botón flotante para ir al carrito, solo visible para clientes -->
     <button class="floating-cart-btn" [routerLink]="['/cart']"
       *ngIf="currentUser?.role === 'client' || currentUser?.role === 'client'" (click)="onCardClick(piece.id)">
       🛒

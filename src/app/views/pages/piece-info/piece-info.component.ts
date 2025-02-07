@@ -8,7 +8,7 @@ import { FirebaseService } from '../../../model/firebase.service';
 import { AuthService } from '../../../model/auth.service';
 import { User } from '../../../interfaces/user.model';
 import { CartService } from '../../../services/cart.service';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
 
 
@@ -29,22 +29,22 @@ export class PieceInfoComponent implements OnInit {
   isExpanded = false;
   suggestedPieces: Piece[] = [];
   // selectedPiece: Piece | null = null; 
-isEditing: boolean = false;
+  isEditing: boolean = false;
 
-selectedPiece: Piece = {
-  id: '',
-  name: '',
-  type: '',
-  subcategory: '',
-  description: '',
-  image: '',
-  price: 0,
-  stock: 0,
-  author: '',
-  height: 0,
-  width: 0,
-  verification: false
-};
+  selectedPiece: Piece = {
+    id: '',
+    name: '',
+    type: '',
+    subcategory: '',
+    description: '',
+    image: '',
+    price: 0,
+    stock: 0,
+    author: '',
+    height: 0,
+    width: 0,
+    verification: false
+  };
 
 
 
@@ -52,10 +52,10 @@ selectedPiece: Piece = {
     private route: ActivatedRoute,
     private firestoreService: FirebaseService,
     private authService: AuthService,
-    private cartService: CartService, 
+    private cartService: CartService,
     private router: Router,
     private loadingService: LoadingService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadingService.show();
@@ -64,14 +64,16 @@ selectedPiece: Piece = {
     this.route.queryParams.subscribe(params => {
       this.pieceId = params['id'];
       if (this.pieceId) {
+        // obtiene la pieza con la id
         this.piece$ = this.firestoreService.getPiecesById(this.pieceId);
+        // obtiene las reviews asociadas a esa pieza
         this.reviews$ = this.firestoreService.getReviewsByPieceId(this.pieceId);
-        
+
         // Oculta el spinner después de cargar los datos
         this.piece$.subscribe(() => {
           this.loadingService.hide();
         });
-        
+
         this.reviews$.subscribe(() => {
           this.loadingService.hide();
         });
@@ -84,11 +86,14 @@ selectedPiece: Piece = {
       this.currentUser = user;
     });
 
+
+   // piezas aleatorias para quizá te interese
     this.firestoreService.getPieces().subscribe((pieces) => {
       this.suggestedPieces = this.getRandomPieces(pieces, 2);
     });
-
   }
+
+  // logica para obtener piezas random
   getRandomPieces(pieces: Piece[], count: number): Piece[] {
     return pieces.sort(() => 0.5 - Math.random()).slice(0, count);
   }
@@ -101,10 +106,11 @@ selectedPiece: Piece = {
   //   this.cartService.addToCart(piece);
   //   alert('Obra agregada al carrito!');
   //   this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
-    
+
   // }
 
   showMoreReviews() {
+    //ve que no sea nulo
     if (this.reviews$) {
       this.reviews$.subscribe(reviews => {
         const totalReviews = reviews.length;
@@ -116,7 +122,8 @@ selectedPiece: Piece = {
         }
       });
 
-      // Alterna el estado de isExpanded
+      // Alterna el estado de isExpanded. isExpanded es true, el botón mostrará "Mostrar menos", y si es false, mostrará "Ver más".
+      // alterna el estado en sí
       this.isExpanded = !this.isExpanded;
     }
   }
@@ -125,10 +132,10 @@ selectedPiece: Piece = {
     this.selectedPiece = { ...piece }; // Copia los datos de la obra seleccionada
     this.isEditing = true; // Muestra el formulario
   }
-  
+
   saveChanges(): void {
-    if (this.selectedPiece) {
-      this.firestoreService.updatePiece(this.selectedPiece.id, this.selectedPiece)
+    if (this.selectedPiece) { // que la pieza seleccionada no sea nula
+      this.firestoreService.updatePiece(this.selectedPiece.id, this.selectedPiece) // manda el id de la pieza seleccionada y luego la pieza total
         .then(() => {
           alert('Obra actualizada con éxito');
           this.isEditing = false; // Cierra el formulario después de guardar
@@ -139,7 +146,7 @@ selectedPiece: Piece = {
         });
     }
   }
-  
+//selectedPiece en una COPIAAA
   cancelEdit(): void {
     this.isEditing = false;
     this.selectedPiece = {
@@ -157,14 +164,14 @@ selectedPiece: Piece = {
       verification: false
     };
   }
-  
-  
+
+
   deletePiece(pieceId: string | null): void {
     if (!pieceId) {
       console.error('No hay ID de obra para eliminar.');
       return;
     }
-  
+
     const confirmDelete = confirm('¿Estás seguro de que quieres eliminar esta obra?');
     if (confirmDelete) {
       this.firestoreService.deletePieceById(pieceId)
@@ -178,40 +185,55 @@ selectedPiece: Piece = {
         });
     }
   }
-  
+
 
   onMouseMove(event: MouseEvent) {
+    // Selecciona el elemento de la lupa (zoom-lens) y la imagen de la obra
     const lens = document.querySelector('.zoom-lens') as HTMLElement;
     const image = document.querySelector('.image') as HTMLImageElement;
     const pieceImage = document.querySelector('.piece-image') as HTMLElement;
-  
+
+    // Si no se encuentran los elementos, sale de la función
     if (!lens || !image || !pieceImage) return;
-  
+
+    // Muestra la lupa al pasar el mouse sobre la imagen
     lens.style.display = 'block';
-  
-    const { left, top, width, height } = pieceImage.getBoundingClientRect();
-    let x = event.clientX - left;
-    let y = event.clientY - top;
-  
-    const lensSize = 100; // Tamaño de la lupa
+
+    // Obtiene las coordenadas del contenedor de la imagen (pieceImage)
+    const { left, top, width, height } = pieceImage.getBoundingClientRect(); // obtiene las medidas en 4 medidas
+    let x = event.clientX - left; // Calcula la posición horizontal del mouse dentro de la imagen
+    let y = event.clientY - top;  // Calcula la posición vertical del mouse dentro de la imagen
+
+    // Tamaño de la lupa (la lupa tendrá un tamaño de 100px)
+    const lensSize = 100;
+
+    // Asegura que la lupa no se desborde de la imagen, limitando las coordenadas x e y
     x = Math.max(lensSize / 2, Math.min(x, width - lensSize / 2));
     y = Math.max(lensSize / 2, Math.min(y, height - lensSize / 2));
-  
-    lens.style.left = `${x - lensSize / 2}px`;
+
+    // Mueve la lupa a la posición donde se encuentra el mouse
+    lens.style.left = `${x - lensSize / 2}px`; //coloca el borde izquierdo de la lupa en la posición x píxeles desde el borde izquierdo de la imagen
     lens.style.top = `${y - lensSize / 2}px`;
-  
-    // Aplicar zoom
-    const zoom = 2;
-    image.style.transformOrigin = `${(x / width) * 100}% ${(y / height) * 100}%`;
+
+    // Configura el zoom en la imagen
+    const zoom = 2; // Factor de zoom
+    // Establece el origen del zoom en función de la posición del mouse dentro de la imagen
+    image.style.transformOrigin = `${(x / width) * 100}% ${(y / height) * 100}%`; // hace que se llene el contenedor
+    // Aplica el zoom a la imagen (escala de 2 veces su tamaño original)
     image.style.transform = `scale(${zoom})`;
-  }
-  
-  onMouseLeave() {
+}
+
+onMouseLeave() {
+    // Selecciona la lupa y la imagen
     const lens = document.querySelector('.zoom-lens') as HTMLElement;
     const image = document.querySelector('.image') as HTMLImageElement;
+
+    // Si la lupa existe, ocúltala
     if (lens) lens.style.display = 'none';
+    // Si la imagen existe, restablece el zoom a su tamaño original
     if (image) image.style.transform = 'scale(1)';
-  }
+}
+
 
   addToCart(piece: any) {
     this.cartService.addToCart(piece);
@@ -221,10 +243,10 @@ selectedPiece: Piece = {
   onCardClick(pieceId: string): void {
     this.router.navigate(['/cart'], { queryParams: { id: pieceId } });
   }
-  
 
 
-  
-  
-  
+
+
+
+
 }

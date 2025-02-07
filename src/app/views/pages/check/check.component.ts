@@ -12,7 +12,9 @@ export class CheckComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    //queryparams para leer los parámetros de la URL
     this.route.queryParams.subscribe(params => {
+      // toma la parte de option y lo compara
       const status = params['option'];
       if (status === 'pago') {
         this.message = '¡Una vez que el administrador apruebe el pago se te notificará su envío!';

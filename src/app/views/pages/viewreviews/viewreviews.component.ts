@@ -20,7 +20,7 @@ export class ViewreviewsComponent implements OnInit {
 
   // Variables para la paginación
   currentPage: number = 1;
-  reviewsPerPage: number = 4;
+  reviewsPerPage: number = 8;
 
   constructor(
     private route: ActivatedRoute,
@@ -81,9 +81,9 @@ export class ViewreviewsComponent implements OnInit {
     });
   }
 
-  toggleFullDescription(review: Review | null): void {
-    this.selectedReview = review;
-  }
+  // toggleFullDescription(review: Review | null): void {
+  //   this.selectedReview = review;
+  // }
 
   
 

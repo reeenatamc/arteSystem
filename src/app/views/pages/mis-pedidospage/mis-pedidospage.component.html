@@ -1,56 +1,85 @@
-<div *ngIf="!isLoading" >
-
+<div *ngIf="!isLoading">
+  <!-- Si no está cargando (isLoading es falso), muestra lo siguiente. -->
+  
   <div *ngIf="sales.length > 0; else noSales">
-    <!-- Controles de paginación -->
-    <h2 class = "maintext">Pedidos</h2>
+    <!-- Si hay ventas (sales.length > 0), muestra las ventas. Si no, muestra el template "noSales" -->
 
+    <!-- Título principal -->
+    <h2 class="maintext">Pedidos</h2>
+
+    <!-- Controles de paginación -->
     <div class="pagination">
+      <!-- Crea un botón por cada página. "i" es el índice, se empieza en 0, pero para el usuario se muestra de 1 a n -->
       <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index"
         [class.active]="currentPage === i + 1">
+        <!-- Al hacer clic, se llama a "changePage()" con el número de la página correspondiente. La clase "active" se aplica a la página actual. -->
         {{ i + 1 }}
       </button>
     </div>
 
+    <!-- Caja de búsqueda -->
     <div class="search-box">
       <label for="search">Buscar:</label>
+      <!-- Input para filtrar las ventas. Se vincula con "searchQuery" usando [(ngModel)] -->
       <input type="text" id="search" [(ngModel)]="searchQuery" (input)="applyFilters()"
         placeholder="Buscar por ID del pedido">
+      <!-- Al escribir en el campo, se ejecuta el método "applyFilters()" para filtrar las ventas. -->
     </div>
 
+    <!-- Mostrar las ventas paginadas -->
     <div *ngFor="let sale of paginatedSales" class="sale-card">
+      <!-- Recorre las ventas que están en "paginatedSales" (las ventas de la página actual) -->
+
       <div class="sale-info">
         <h3>Pedido ID: {{ sale.id }}</h3>
+        <!-- Muestra el ID de la venta -->
         <p>Total: {{ sale.total | currency }}</p>
+        <!-- Muestra el total de la venta formateado como moneda -->
+
         <p [ngClass]="sale.status ? 'verification-true' : 'verification-false'">
+          <!-- Cambia la clase CSS según el estado de la venta: "Completado" o "Pendiente" -->
           {{ sale.status ? 'Completado' : 'Pendiente' }}
         </p>
+
         <div class="pieces">
           <div *ngFor="let piece of sale.piece" class="piece">
+            <!-- Recorre las piezas asociadas a la venta -->
             <img [src]="piece.image" alt="{{ piece.name }}">
+            <!-- Muestra la imagen de la pieza con el nombre como atributo "alt" -->
           </div>
         </div>
-        <button class="dar-resenia-button" *ngIf="sale.status" (click)="navigateToReviews(sale.id)">
-          <img src="\assets\media\review-icon.svg" alt="Editar" class="icon">
 
-          ¡Dejar reseña!</button>
+        <button class="dar-resenia-button" *ngIf="sale.status" (click)="navigateToReviews(sale.id)">
+          <!-- Si la venta está completada (sale.status es verdadero), muestra un botón para dejar una reseña -->
+          <img src="\assets\media\review-icon.svg" alt="Editar" class="icon">
+          ¡Dejar reseña!
+        </button>
       </div>
+
       <div class="payment-proof">
+        <!-- Muestra un enlace para ver el comprobante de pago -->
         <a [href]="sale.imagePayment" target="_blank">Ver Comprobante de Pago</a>
       </div>
     </div>
 
     <!-- Controles de paginación (repetidos abajo) -->
     <div class="pagination">
+      <!-- Repite los controles de paginación en la parte inferior para que el usuario pueda navegar fácilmente -->
+       <!-- arreglo q tiene de lenght totalpages -->
       <button (click)="changePage(i + 1)" *ngFor="let page of [].constructor(totalPages); let i = index"
-        [class.active]="currentPage === i + 1">
+        [class.active]="currentPage === i + 1">       <!-- class active para poder relacionarlo con la claseactiva y poder cambiarle de color-->
         {{ i + 1 }}
       </button>
     </div>
   </div>
+
+  <!-- Template cuando no hay ventas -->
   <ng-template #noSales>
     <div class="no-sales-container">
       <img src="\assets\media\error.svg" alt="Sin pedidos" class="no-sales-image">
-      <p class = "pedidos-text">No tienes pedidos :(</p>
+      <!-- Muestra una imagen indicando que no hay pedidos -->
+      <p class="pedidos-text">No tienes pedidos :(</p>
+      <!-- Muestra un mensaje de que no hay ventas -->
     </div>
   </ng-template>
 </div>

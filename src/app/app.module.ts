@@ -10,7 +10,7 @@ import { LoginPage } from './views/pages/login/login.component';
 import { RegisterPageComponent } from './views/pages/register-page/register-page.component';
 import { LandingPageComponent } from './views/pages/landing-page/landing-page.component';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment'; // importanci
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { UploadPieceComponent } from './views/pages/uploadpiece-page/uploadpiece-page.component';
 import { CategoryComponent } from './views/pages/category/category.component';
