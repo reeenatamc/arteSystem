@@ -3,6 +3,7 @@ kind: Component
 metadata:
   name: arteSystem
   annotations:
+    backstage.io/techdocs-ref: value
     github.com/project-slug: reeenatamc/arteSystem
 spec:
   type: other
